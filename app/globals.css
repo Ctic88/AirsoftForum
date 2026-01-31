@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root,
+[data-theme='army'] {
+  --background: #0d0e0d;
+  --foreground: #e1e1d7;
+  --accent: #6b7a3a;
+  --accent-light: #8b9a5a;
+  --glass: rgba(13, 14, 13, 0.7);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='tan'] {
+  --background: #1a1814;
+  --accent: #b89a6d;
+  --accent-light: #d2b48c;
+}
+
+[data-theme='urban'] {
+  --background: #111111;
+  --accent: #3b3b3b;
+  --accent-light: #5a5a5a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+
+  --font-sans: "Inter", var(--font-geist-sans);
+
+  --radius-apple: 20px;
+  --radius-apple-lg: 32px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.apple-card {
+  border-radius: var(--radius-apple);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.apple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
