@@ -88,7 +88,7 @@ export default function ForumPage() {
     };
 
     return (
-        <main className="min-h-screen bg-background pb-20">
+        <main className="min-h-screen bg-background pb-32 md:pb-20">
             <Navbar themeSwitcher />
 
             <div className="pt-32 px-4 max-w-5xl mx-auto">
