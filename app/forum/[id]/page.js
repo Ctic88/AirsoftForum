@@ -91,7 +91,7 @@ export default function TopicPage({ params }) {
                     Back to Briefing
                 </Link>
 
-                <article className="glass p-10 rounded-[40px] border border-white/10 mb-12 relative overflow-hidden">
+                <article className="glass p-6 md:p-10 rounded-[32px] md:rounded-[40px] border border-white/10 mb-12 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 blur-[80px]" />
 
                     <header className="mb-8">
@@ -99,7 +99,7 @@ export default function TopicPage({ params }) {
                             <span className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Confidential Intel</span>
                             <span className="bg-white/5 text-foreground/40 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Status: Active</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">{topic.title}</h1>
+                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">{topic.title}</h1>
                         <div className="flex items-center gap-6 text-sm text-foreground/40">
                             <div className="flex items-center gap-2">
                                 <User className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function TopicPage({ params }) {
 
                     {/* Comment Form */}
                     {session ? (
-                        <form onSubmit={handlePostComment} className="glass p-6 rounded-[32px] border border-white/10 relative group">
+                        <form onSubmit={handlePostComment} className="glass p-5 md:p-6 rounded-[28px] md:rounded-[32px] border border-white/10 relative group">
                             <textarea
                                 value={commentContent}
                                 onChange={(e) => setCommentContent(e.target.value)}

@@ -67,12 +67,12 @@ export default function SettingsPage() {
 
             <div className="pt-32 px-4 max-w-3xl mx-auto">
                 <header className="mb-12">
-                    <h1 className="text-4xl font-bold text-white mb-2 uppercase tracking-tight">Operator <span className="text-accent-light">Profile</span></h1>
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 uppercase tracking-tight">Operator <span className="text-accent-light">Profile</span></h1>
                     <p className="text-foreground/40">Customize your tactical identity in the field.</p>
                 </header>
 
-                <form onSubmit={handleSave} className="space-y-8">
-                    <div className="glass p-10 rounded-[40px] border border-white/10 space-y-8">
+                <form onSubmit={handleSave} className="space-y-6 md:space-y-8">
+                    <div className="glass p-6 md:p-10 rounded-[32px] md:rounded-[40px] border border-white/10 space-y-6 md:space-y-8">
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 flex items-center gap-2">

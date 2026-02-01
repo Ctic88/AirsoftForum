@@ -19,7 +19,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-20 text-center px-4 max-w-4xl">
-          <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-6 animate-fade-in text-white uppercase">
+          <h1 className="text-4xl md:text-8xl font-bold tracking-tighter mb-6 animate-fade-in text-white uppercase px-4">
             ELITE <span className="text-accent-light">COMMUNITY</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto animate-fade-in-delayed">

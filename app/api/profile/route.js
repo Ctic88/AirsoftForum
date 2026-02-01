@@ -42,6 +42,8 @@ export async function PUT(req) {
             return NextResponse.json({ message: 'Name too short' }, { status: 400 });
         }
 
+        // We use the common 'supabase' client which uses the anon key.
+        // If this fails, it's likely due to RLS policies blocking public updates.
         const { data: user, error } = await supabase
             .from('users')
             .update({ name, callsign, team, role })
@@ -51,11 +53,17 @@ export async function PUT(req) {
 
         if (error) {
             console.error("Supabase Profile Update Error:", error);
-            return NextResponse.json({ message: 'Error updating profile', details: error.message }, { status: 500 });
+            // Provide more detail to help the user debug (e.g. if RLS is the issue)
+            return NextResponse.json({
+                message: 'Error updating profile',
+                details: error.message,
+                hint: "Check your Supabase RLS policies for the 'users' table."
+            }, { status: 500 });
         }
 
         return NextResponse.json(user);
     } catch (error) {
-        return NextResponse.json({ message: 'Error updating profile', details: error.message }, { status: 500 });
+        console.error("Profile PUT Crash:", error);
+        return NextResponse.json({ message: 'Internal server error', details: error.message }, { status: 500 });
     }
 }

@@ -144,8 +144,8 @@ export default function WikiPage() {
                         <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-light px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 border border-accent/20">
                             <Book size={12} /> Tactical Knowledge Base
                         </div>
-                        <h1 className="text-5xl font-bold text-white uppercase tracking-tight">Technical <span className="text-accent-light">Wiki</span></h1>
-                        <p className="text-foreground/40 mt-2 text-lg">Central intelligence repository for gear and tactics.</p>
+                        <h1 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-tight">Technical <span className="text-accent-light">Wiki</span></h1>
+                        <p className="text-foreground/40 mt-2 text-base md:text-lg">Central intelligence repository for gear and tactics.</p>
                     </div>
 
                     <div className="relative group min-w-[300px]">
@@ -172,7 +172,7 @@ export default function WikiPage() {
                         <button
                             key={cat.name}
                             onClick={() => setActiveCategory(activeCategory === cat.name ? 'All' : cat.name)}
-                            className={`glass p-8 rounded-[40px] border transition-all text-center relative overflow-hidden group ${activeCategory === cat.name ? 'border-accent-light bg-accent/5' : 'border-white/5 hover:border-white/20'}`}
+                            className={`glass p-6 md:p-8 rounded-[40px] border transition-all text-center relative overflow-hidden group ${activeCategory === cat.name ? 'border-accent-light bg-accent/5' : 'border-white/5 hover:border-white/20'}`}
                         >
                             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-transform group-hover:scale-110 ${activeCategory === cat.name ? 'bg-accent/40 text-white' : 'bg-white/5 text-accent-light'}`}>
                                 <cat.icon size={32} />
@@ -202,7 +202,7 @@ export default function WikiPage() {
                             <div
                                 key={art.id}
                                 onClick={() => setSelectedArticle(art)}
-                                className="p-8 hover:bg-white/5 transition-all flex items-center justify-between group cursor-pointer"
+                                className="p-6 md:p-8 hover:bg-white/5 transition-all flex items-center justify-between group cursor-pointer"
                             >
                                 <div className="flex items-center gap-6">
                                     <div className="bg-white/5 p-4 rounded-2xl text-foreground/20 group-hover:text-accent-light transition-colors">
@@ -241,7 +241,7 @@ export default function WikiPage() {
             {selectedArticle && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedArticle(null)}></div>
-                    <div className="glass w-full max-w-3xl rounded-[48px] border border-white/10 overflow-hidden relative shadow-2xl animate-in fade-in zoom-in duration-300">
+                    <div className="relative glass w-full max-w-3xl rounded-[40px] border border-white/10 overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 overflow-y-auto max-h-[95vh]">
                         <div className="h-40 bg-accent/20 relative overflow-hidden">
                             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                             <button
@@ -257,28 +257,28 @@ export default function WikiPage() {
                                     </span>
                                     <span className="text-[10px] font-bold text-foreground/60 uppercase tracking-widest">ID: #00{selectedArticle.id}</span>
                                 </div>
-                                <h2 className="text-4xl font-bold text-white tracking-tight">{selectedArticle.title}</h2>
+                                <h2 className="text-2xl md:text-4xl font-bold text-white tracking-tight">{selectedArticle.title}</h2>
                             </div>
                         </div>
 
-                        <div className="p-10 md:p-14">
-                            <div className="flex flex-wrap gap-4 mb-10">
+                        <div className="p-6 md:p-14">
+                            <div className="flex flex-wrap gap-3 md:gap-4 mb-8 md:mb-10">
                                 {selectedArticle.tags.map(tag => (
-                                    <span key={tag} className="text-[10px] font-bold text-accent-light bg-accent/5 px-4 py-2 rounded-xl border border-accent/10">
+                                    <span key={tag} className="text-[10px] font-bold text-accent-light bg-accent/5 px-3 md:px-4 py-2 rounded-xl border border-accent/10">
                                         # {tag}
                                     </span>
                                 ))}
                             </div>
 
                             <div className="prose prose-invert max-w-none">
-                                <div className="bg-white/5 p-8 rounded-3xl border border-white/5 relative">
-                                    <div className="absolute top-0 right-10 -mt-3">
-                                        <div className="bg-background px-4 py-1 rounded-full border border-white/10 flex items-center gap-2">
+                                <div className="bg-white/5 p-6 md:p-8 rounded-3xl border border-white/5 relative">
+                                    <div className="absolute top-0 right-6 md:right-10 -mt-3">
+                                        <div className="bg-background px-3 md:px-4 py-1 rounded-full border border-white/10 flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
                                             <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest italic tracking-tighter">Verified Intel</span>
                                         </div>
                                     </div>
-                                    <p className="text-foreground/80 leading-relaxed text-lg italic">
+                                    <p className="text-foreground/80 leading-relaxed text-base md:text-lg italic">
                                         "{selectedArticle.content}"
                                     </p>
                                 </div>

@@ -95,8 +95,8 @@ export default function ForumPage() {
                 <header className="mb-16">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
                         <div>
-                            <h1 className="text-5xl font-bold text-white uppercase tracking-tight mb-2">Intel <span className="text-accent-light">Exchange</span></h1>
-                            <p className="text-foreground/40 text-lg">Communication channel for active field operators.</p>
+                            <h1 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-2">Intel <span className="text-accent-light">Exchange</span></h1>
+                            <p className="text-foreground/40 text-base md:text-lg">Communication channel for active field operators.</p>
                         </div>
                         <button
                             onClick={() => setShowModal(true)}
@@ -136,11 +136,11 @@ export default function ForumPage() {
                     ) : (
                         <>
                             {filteredTopics.length > 0 ? filteredTopics.map((topic) => (
-                                <div key={topic.id} className="glass p-8 rounded-[28px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative">
+                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[28px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative">
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="flex-1 mr-4">
                                             <Link href={`/forum/${topic.id}`}>
-                                                <h2 className="text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors">{topic.title}</h2>
+                                                <h2 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors">{topic.title}</h2>
                                             </Link>
                                         </div>
                                         <div className="flex items-center gap-3">
@@ -191,8 +191,8 @@ export default function ForumPage() {
             {showModal && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-                    <div className="relative glass w-full max-w-2xl p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in">
-                        <h3 className="text-3xl font-bold mb-8">Deploy New Intel</h3>
+                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-white">Deploy New Intel</h3>
                         <form onSubmit={handleCreate} className="space-y-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-foreground/40">Report Title</label>

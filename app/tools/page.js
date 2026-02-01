@@ -15,7 +15,7 @@ export default function ToolsPage() {
                         <Settings size={14} className="animate-spin-slow" />
                         Tactical Maintenance
                     </div>
-                    <h1 className="text-5xl font-bold tracking-tight text-white mb-4">TACTICAL <span className="text-accent-light">TOOLS</span></h1>
+                    <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">TACTICAL <span className="text-accent-light">TOOLS</span></h1>
                     <p className="text-foreground/40 max-w-xl mx-auto text-lg italic">
                         Precision engineering for the modern operator. Calibrate your gear with intelligence.
                     </p>

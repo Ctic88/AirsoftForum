@@ -99,8 +99,8 @@ export default function LoadoutsPage() {
                         <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-light px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 border border-accent/20">
                             <Package size={12} /> Armoury & Loadouts
                         </div>
-                        <h1 className="text-5xl font-bold text-white uppercase tracking-tight">Operator <span className="text-accent-light">Kits</span></h1>
-                        <p className="text-foreground/40 mt-2 text-lg">Inspect community gear and tactical configurations.</p>
+                        <h1 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-tight">Operator <span className="text-accent-light">Kits</span></h1>
+                        <p className="text-foreground/40 mt-2 text-base md:text-lg">Inspect community gear and tactical configurations.</p>
                     </div>
 
                     {session && (
@@ -133,8 +133,8 @@ export default function LoadoutsPage() {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-accent-light transition-colors">{kit.title}</h3>
+                                <div className="p-6 md:p-8 flex-1 flex flex-col">
+                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-accent-light transition-colors">{kit.title}</h3>
                                     <p className="text-sm text-foreground/40 mb-6 line-clamp-2 italic">"{kit.description}"</p>
 
                                     <div className="space-y-3 mb-8">
@@ -179,8 +179,8 @@ export default function LoadoutsPage() {
             {showModal && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-                    <div className="relative glass w-full max-w-2xl p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
-                        <h3 className="text-3xl font-bold mb-8">Deploy Tactical Kit</h3>
+                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-white">Deploy Tactical Kit</h3>
                         <form onSubmit={handleCreate} className="space-y-6">
                             {/* Image Upload Area */}
                             <div className="space-y-2">
@@ -269,12 +269,12 @@ export default function LoadoutsPage() {
                             )}
                         </div>
 
-                        <div className="w-full md:w-1/2 p-10 overflow-y-auto">
+                        <div className="w-full md:w-1/2 p-6 md:p-10 overflow-y-auto">
                             <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 border border-accent/20">
                                 Tactical Intelligence
                             </div>
-                            <h2 className="text-4xl font-bold text-white mb-4 uppercase tracking-tight">{selectedKit.title}</h2>
-                            <p className="text-foreground/60 italic mb-10 leading-relaxed">"{selectedKit.description}"</p>
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-tight">{selectedKit.title}</h2>
+                            <p className="text-foreground/60 text-sm md:text-base italic mb-8 md:mb-10 leading-relaxed">"{selectedKit.description}"</p>
 
                             <div className="space-y-6">
                                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light">Kit Manifest</h4>

@@ -124,8 +124,8 @@ export default function EventsPage() {
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div>
                         <Link href="/intel" className="text-accent-light text-xs font-bold uppercase tracking-widest hover:underline mb-4 inline-block">← Return to Intel Hub</Link>
-                        <h1 className="text-5xl font-bold text-white uppercase tracking-tight">Mission <span className="text-accent-light">Calendar</span></h1>
-                        <p className="text-foreground/40 mt-2 text-lg">Coordinate deployments and join upcoming operations.</p>
+                        <h1 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-tight">Mission <span className="text-accent-light">Calendar</span></h1>
+                        <p className="text-foreground/40 mt-2 text-base md:text-lg">Coordinate deployments and join upcoming operations.</p>
                     </div>
 
                     {session && (
@@ -145,12 +145,12 @@ export default function EventsPage() {
                         {events.length > 0 ? events.map((event) => {
                             const isJoined = event.event_attendees?.some(a => a.user_id === session?.user?.id);
                             return (
-                                <div key={event.id} className="glass p-8 rounded-[32px] border border-white/5 hover:border-accent-light/30 transition-all group flex flex-col md:flex-row gap-8 items-start">
-                                    <div className="bg-white/5 p-6 rounded-2xl flex flex-col items-center justify-center min-w-[100px] border border-white/5">
-                                        <span className="text-accent-light text-xs font-bold uppercase tracking-widest mb-1">
+                                <div key={event.id} className="glass p-6 md:p-8 rounded-[32px] border border-white/5 hover:border-accent-light/30 transition-all group flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                                    <div className="bg-white/5 p-4 md:p-6 rounded-2xl flex flex-row md:flex-col items-center justify-center min-w-full md:min-w-[100px] gap-4 md:gap-0 border border-white/5">
+                                        <span className="text-accent-light text-[10px] md:text-xs font-bold uppercase tracking-widest mb-0 md:mb-1">
                                             {new Date(event.event_date).toLocaleDateString('ro-RO', { month: 'short' })}
                                         </span>
-                                        <span className="text-3xl font-bold text-white">
+                                        <span className="text-2xl md:text-3xl font-bold text-white">
                                             {new Date(event.event_date).getDate()}
                                         </span>
                                     </div>
@@ -175,7 +175,7 @@ export default function EventsPage() {
                                                 </button>
                                             )}
                                         </div>
-                                        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-accent-light transition-colors">{event.title}</h3>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-accent-light transition-colors">{event.title}</h3>
                                         <p className="text-xs text-foreground/40 mb-4">Commanded by: <span className="text-white font-bold">{event.author?.name || 'Unknown'}</span></p>
                                         <p className="text-foreground/60 mb-6 leading-relaxed italic text-sm">"{event.description}"</p>
 
@@ -417,9 +417,9 @@ export default function EventsPage() {
                             </div>
                         </div>
 
-                        <div className="p-8 md:p-12">
-                            <div className="grid md:grid-cols-2 gap-8 mb-10">
-                                <div className="space-y-6">
+                        <div className="p-6 md:p-12">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
+                                <div className="space-y-4 md:space-y-6">
                                     <div>
                                         <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-2">Location / DZ</label>
                                         <div className="flex items-center gap-3 text-white">
@@ -484,11 +484,11 @@ export default function EventsPage() {
                                 </div>
                             )}
 
-                            <div className="flex gap-4">
+                            <div className="flex flex-col md:flex-row gap-3 md:gap-4">
                                 <button
                                     onClick={() => handleJoin(selectedEvent.id)}
                                     disabled={selectedEvent.event_attendees?.some(a => a.user_id === session?.user?.id)}
-                                    className={`flex-1 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest text-center transition-all shadow-lg ${selectedEvent.event_attendees?.some(a => a.user_id === session?.user?.id)
+                                    className={`w-full md:flex-1 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest text-center transition-all shadow-lg ${selectedEvent.event_attendees?.some(a => a.user_id === session?.user?.id)
                                         ? 'bg-white/10 text-foreground/40 cursor-not-allowed'
                                         : 'bg-accent hover:bg-accent-light text-white'
                                         }`}
@@ -497,7 +497,7 @@ export default function EventsPage() {
                                 </button>
                                 <button
                                     onClick={() => setSelectedEvent(null)}
-                                    className="px-8 py-4 bg-white/5 hover:bg-white/10 rounded-2xl text-xs font-bold uppercase tracking-widest text-white transition-all border border-white/10"
+                                    className="w-full md:px-8 py-4 bg-white/5 hover:bg-white/10 rounded-2xl text-xs font-bold uppercase tracking-widest text-white transition-all border border-white/10"
                                 >
                                     Dismiss
                                 </button>
