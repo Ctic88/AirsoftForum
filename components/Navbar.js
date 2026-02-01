@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { Shield, User, LogOut, Menu, X, Settings, LayoutGrid, Calendar, Info, MessageSquare } from 'lucide-react';
@@ -8,6 +8,18 @@ import { Shield, User, LogOut, Menu, X, Settings, LayoutGrid, Calendar, Info, Me
 export default function Navbar() {
     const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
+
+    // Prevent scrolling when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
@@ -82,83 +94,91 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="absolute top-24 left-4 right-4 z-40 animate-in fade-in slide-in-from-top-4 duration-300">
-                    <div className="glass rounded-[32px] border border-white/10 shadow-2xl overflow-hidden">
-                        <div className="p-6 flex flex-col gap-4">
-                            {/* Navigation */}
-                            <div className="grid grid-cols-2 gap-3">
-                                <Link onClick={() => setIsOpen(false)} href="/" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
-                                    <LayoutGrid size={18} className="text-accent-light" /> Home
-                                </Link>
-                                <Link onClick={() => setIsOpen(false)} href="/tools" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
-                                    <Settings size={18} className="text-accent-light" /> Tools
-                                </Link>
-                                <Link onClick={() => setIsOpen(false)} href="/wiki" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm text-center">
-                                    <Info size={18} className="text-accent-light" /> Wiki
-                                </Link>
-                                <Link onClick={() => setIsOpen(false)} href="/tips" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
-                                    <Shield size={18} className="text-accent-light" /> Sfaturi
-                                </Link>
-                            </div>
+                <div className="fixed inset-0 z-[100] md:hidden">
+                    {/* Backdrop for extra isolation */}
+                    <div
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setIsOpen(false)}
+                    />
 
-                            {session && (
-                                <div className="grid grid-cols-3 gap-3">
-                                    <Link onClick={() => setIsOpen(false)} href="/forum" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold font-bold">
-                                        <MessageSquare size={20} className="text-accent-light" /> Forum
+                    <div className="absolute top-24 left-4 right-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                        <div className="bg-[#0b0c0b]/95 backdrop-blur-2xl rounded-[32px] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                            <div className="p-6 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
+                                {/* Navigation */}
+                                <div className="grid grid-cols-2 gap-3">
+                                    <Link onClick={() => setIsOpen(false)} href="/" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
+                                        <LayoutGrid size={18} className="text-accent-light" /> Home
                                     </Link>
-                                    <Link onClick={() => setIsOpen(false)} href="/loadouts" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold">
-                                        <Shield size={20} className="text-accent-light" /> Gear
+                                    <Link onClick={() => setIsOpen(false)} href="/tools" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
+                                        <Settings size={18} className="text-accent-light" /> Tools
                                     </Link>
-                                    <Link onClick={() => setIsOpen(false)} href="/intel" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold">
-                                        <Calendar size={20} className="text-accent-light" /> Intel
+                                    <Link onClick={() => setIsOpen(false)} href="/wiki" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm text-center">
+                                        <Info size={18} className="text-accent-light" /> Wiki
+                                    </Link>
+                                    <Link onClick={() => setIsOpen(false)} href="/tips" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
+                                        <Shield size={18} className="text-accent-light" /> Sfaturi
                                     </Link>
                                 </div>
-                            )}
 
-                            {/* Theme Toggles */}
-                            <div className="bg-black/20 p-4 rounded-3xl flex items-center justify-between mt-2">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-2">Sector Theme</span>
-                                <div className="flex items-center gap-2">
-                                    {['army', 'tan', 'urban'].map((t) => (
-                                        <button
-                                            key={t}
-                                            onClick={() => {
-                                                document.documentElement.setAttribute('data-theme', t);
-                                                setIsOpen(false);
-                                            }}
-                                            className="w-10 h-10 rounded-xl border border-white/10 transition-all active:scale-90"
-                                            style={{ backgroundColor: t === 'army' ? '#4b5320' : t === 'tan' ? '#d2b48c' : '#3b3b3b' }}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Auth Actions */}
-                            <div className="mt-4 pt-4 border-t border-white/5 flex flex-col gap-3">
-                                {session ? (
-                                    <>
-                                        <div className="flex items-center gap-4 px-4 py-2">
-                                            <div className="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center text-accent-light">
-                                                <User size={24} />
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="font-bold text-white tracking-tight">{session.user.name}</span>
-                                                <span className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{session.user.role || 'Operator'}</span>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => { signOut(); setIsOpen(false); }}
-                                            className="w-full py-4 bg-accent text-white rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl transition-all"
-                                        >
-                                            Logout Operation
-                                        </button>
-                                    </>
-                                ) : (
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <Link onClick={() => setIsOpen(false)} href="/login" className="py-4 glass border border-white/10 rounded-2xl font-bold uppercase tracking-widest text-center text-xs">Login</Link>
-                                        <Link onClick={() => setIsOpen(false)} href="/register" className="py-4 bg-accent text-white rounded-2xl font-bold uppercase tracking-widest text-center text-xs shadow-xl">Join Hub</Link>
+                                {session && (
+                                    <div className="grid grid-cols-3 gap-3">
+                                        <Link onClick={() => setIsOpen(false)} href="/forum" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold font-bold">
+                                            <MessageSquare size={20} className="text-accent-light" /> Forum
+                                        </Link>
+                                        <Link onClick={() => setIsOpen(false)} href="/loadouts" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold">
+                                            <Shield size={20} className="text-accent-light" /> Gear
+                                        </Link>
+                                        <Link onClick={() => setIsOpen(false)} href="/intel" className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-xs font-bold">
+                                            <Calendar size={20} className="text-accent-light" /> Intel
+                                        </Link>
                                     </div>
                                 )}
+
+                                {/* Theme Toggles */}
+                                <div className="bg-black/20 p-4 rounded-3xl flex items-center justify-between mt-2">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-2">Sector Theme</span>
+                                    <div className="flex items-center gap-2">
+                                        {['army', 'tan', 'urban'].map((t) => (
+                                            <button
+                                                key={t}
+                                                onClick={() => {
+                                                    document.documentElement.setAttribute('data-theme', t);
+                                                    setIsOpen(false);
+                                                }}
+                                                className="w-10 h-10 rounded-xl border border-white/10 transition-all active:scale-90"
+                                                style={{ backgroundColor: t === 'army' ? '#4b5320' : t === 'tan' ? '#d2b48c' : '#3b3b3b' }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Auth Actions */}
+                                <div className="mt-4 pt-4 border-t border-white/5 flex flex-col gap-3">
+                                    {session ? (
+                                        <>
+                                            <div className="flex items-center gap-4 px-4 py-2">
+                                                <div className="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center text-accent-light">
+                                                    <User size={24} />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold text-white tracking-tight">{session.user.name}</span>
+                                                    <span className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{session.user.role || 'Operator'}</span>
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={() => { signOut(); setIsOpen(false); }}
+                                                className="w-full py-4 bg-accent text-white rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl transition-all"
+                                            >
+                                                Logout Operation
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <Link onClick={() => setIsOpen(false)} href="/login" className="py-4 glass border border-white/10 rounded-2xl font-bold uppercase tracking-widest text-center text-xs">Login</Link>
+                                            <Link onClick={() => setIsOpen(false)} href="/register" className="py-4 bg-accent text-white rounded-2xl font-bold uppercase tracking-widest text-center text-xs shadow-xl">Join Hub</Link>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
