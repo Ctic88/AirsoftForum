@@ -9,13 +9,13 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
-            <div className="glass w-full max-w-5xl h-16 rounded-full flex items-center justify-between px-8 border border-white/10 shadow-2xl">
-                <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="glass w-full max-w-6xl h-16 rounded-full flex items-center justify-between px-8 border border-white/10 shadow-2xl">
+                <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0">
                     <Shield className="w-8 h-8 text-accent-light" />
                     <span className="font-bold text-xl tracking-tight text-foreground">AIRSOFT<span className="text-accent-light">FORUM</span></span>
                 </Link>
 
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-6">
                     <div className="flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10">
                         {['army', 'tan', 'urban'].map((t) => (
                             <button
@@ -32,6 +32,7 @@ export default function Navbar() {
 
                     <Link href="/" className="text-sm font-medium hover:text-accent-light transition-colors">Home</Link>
                     <Link href="/tools" className="text-sm font-medium hover:text-accent-light transition-colors">Tools</Link>
+                    <Link href="/tips" className="text-sm font-medium hover:text-accent-light transition-colors">Sfaturi</Link>
                     {session && (
                         <>
                             <Link href="/forum" className="text-sm font-medium hover:text-accent-light transition-colors">Forum</Link>
@@ -44,7 +45,14 @@ export default function Navbar() {
                         <div className="flex items-center gap-4">
                             <Link href="/settings" className="flex items-center gap-2 text-sm text-foreground/80 hover:text-accent-light transition-colors">
                                 <User className="w-4 h-4" />
-                                <span>{session.user.name || session.user.email}</span>
+                                <div className="flex flex-col items-start leading-tight">
+                                    <span>{session.user.name || session.user.email}</span>
+                                    {session.user.role === 'admin' && (
+                                        <span className="text-[9px] font-bold text-accent-light uppercase tracking-widest bg-accent/10 px-1.5 py-0.5 rounded-md border border-accent/20 mt-0.5">
+                                            Master Admin
+                                        </span>
+                                    )}
+                                </div>
                             </Link>
                             <button
                                 onClick={() => signOut()}

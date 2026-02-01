@@ -1,5 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Converter from '@/components/Converter';
+import BatteryCalculator from '@/components/BatteryCalculator';
+import CommsGuide from '@/components/CommsGuide';
 import { Settings } from 'lucide-react';
 
 export default function ToolsPage() {
@@ -21,20 +23,8 @@ export default function ToolsPage() {
 
                 <div className="grid gap-12">
                     <Converter />
-
-                    {/* Optional: Placeholder for future tools */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="glass p-8 rounded-[32px] border border-white/5 opacity-50 flex flex-col items-center justify-center text-center">
-                            <div className="w-12 h-12 rounded-full bg-white/5 mb-4 flex items-center justify-center text-foreground/20 italic font-bold">?</div>
-                            <h4 className="font-bold text-white/40 mb-2">Comms Encryption</h4>
-                            <p className="text-xs text-foreground/20 uppercase tracking-widest">Locked: Under Development</p>
-                        </div>
-                        <div className="glass p-8 rounded-[32px] border border-white/5 opacity-50 flex flex-col items-center justify-center text-center">
-                            <div className="w-12 h-12 rounded-full bg-white/5 mb-4 flex items-center justify-center text-foreground/20 italic font-bold">?</div>
-                            <h4 className="font-bold text-white/40 mb-2">Squad Map Sync</h4>
-                            <p className="text-xs text-foreground/20 uppercase tracking-widest">Locked: Under Development</p>
-                        </div>
-                    </div>
+                    <BatteryCalculator />
+                    <CommsGuide />
                 </div>
             </div>
         </main>

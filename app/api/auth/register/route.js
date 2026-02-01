@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import bcrypt from 'bcryptjs';
 
 export async function POST(req) {
     try {
@@ -9,8 +10,16 @@ export async function POST(req) {
             return NextResponse.json({ message: 'Missing fields' }, { status: 400 });
         }
 
-        // Check if user already exists in the 'users' table
-        const { data: existingUser, error: checkError } = await supabase
+        // Basic validation
+        if (!email.includes('@')) {
+            return NextResponse.json({ message: 'Invalid email format' }, { status: 400 });
+        }
+        if (password.length < 6) {
+            return NextResponse.json({ message: 'Password too short (min 6 chars)' }, { status: 400 });
+        }
+
+        // Check if user already exists
+        const { data: existingUser } = await supabase
             .from('users')
             .select('email')
             .eq('email', email)
@@ -20,13 +29,16 @@ export async function POST(req) {
             return NextResponse.json({ message: 'User already exists' }, { status: 400 });
         }
 
-        // Insert new user into 'users' table
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert new user
         const { data, error } = await supabase
             .from('users')
             .insert([
-                { name, email, password } // Storing plain text password as per original logic (NOT RECOMMENDED FOR PRODUCTION)
+                { name, email, password: hashedPassword }
             ])
-            .select()
+            .select('id, name, email')
             .single();
 
         if (error) throw error;

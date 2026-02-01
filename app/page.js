@@ -15,7 +15,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-background z-10" />
-          <div className="w-full h-full bg-[url('/hero.png')] bg-cover bg-center animate-subtle-zoom" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595590424283-b8f17842773f?q=80&w=2070&auto=format&fit=crop')" }}></div>
+          <div className="w-full h-full bg-[url('/hero-custom.png')] bg-cover bg-center animate-subtle-zoom" style={{ backgroundImage: "url('/hero-custom.png')" }}></div>
         </div>
 
         <div className="relative z-20 text-center px-4 max-w-4xl">

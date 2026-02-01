@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import { Plus, MessageSquare, User, Calendar, Loader2, Search } from 'lucide-react';
+import { Plus, MessageSquare, User, Calendar, Loader2, Search, Trash2 } from 'lucide-react';
 
 export default function ForumPage() {
     const { data: session, status } = useSession();
@@ -18,6 +18,7 @@ export default function ForumPage() {
     const [creating, setCreating] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [reportCategory, setReportCategory] = useState('Tactics');
 
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -47,6 +48,23 @@ export default function ForumPage() {
         setLoading(false);
     };
 
+    const handleDeleteTopic = async (e, topicId) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!confirm('Are you sure you want to delete this report?')) return;
+
+        const res = await fetch(`/api/topics?id=${topicId}`, {
+            method: 'DELETE',
+        });
+
+        if (res.ok) {
+            fetchTopics();
+        } else {
+            const error = await res.json();
+            alert(`Error: ${error.message}`);
+        }
+    };
+
     const handleCreate = async (e) => {
         e.preventDefault();
         setCreating(true);
@@ -56,7 +74,7 @@ export default function ForumPage() {
             body: JSON.stringify({
                 title: newTitle,
                 content: newContent,
-                category: selectedCategory === 'All' ? 'Tactics' : selectedCategory
+                category: reportCategory
             }),
         });
 
@@ -118,14 +136,29 @@ export default function ForumPage() {
                     ) : (
                         <>
                             {filteredTopics.length > 0 ? filteredTopics.map((topic) => (
-                                <Link key={topic.id} href={`/forum/${topic.id}`}>
-                                    <div className="glass p-8 rounded-[28px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group">
-                                        <div className="flex items-start justify-between mb-4">
-                                            <h2 className="text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors">{topic.title}</h2>
+                                <div key={topic.id} className="glass p-8 rounded-[28px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative">
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex-1 mr-4">
+                                            <Link href={`/forum/${topic.id}`}>
+                                                <h2 className="text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors">{topic.title}</h2>
+                                            </Link>
+                                        </div>
+                                        <div className="flex items-center gap-3">
                                             <div className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20">
                                                 {topic.category || 'General'}
                                             </div>
+                                            {(session?.user?.id === topic.authorId || session?.user?.role === 'admin') && (
+                                                <button
+                                                    onClick={(e) => handleDeleteTopic(e, topic.id)}
+                                                    className="p-2 text-foreground/20 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                                                    title="Delete Report"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            )}
                                         </div>
+                                    </div>
+                                    <Link href={`/forum/${topic.id}`}>
                                         <p className="text-foreground/70 mb-8 line-clamp-2 italic">"{topic.content}"</p>
                                         <div className="flex items-center gap-6 text-[10px] text-foreground/40 border-t border-white/5 pt-6 uppercase tracking-widest font-bold">
                                             <div className="flex items-center gap-2">
@@ -141,8 +174,8 @@ export default function ForumPage() {
                                                 <span>View Briefing</span>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                </div>
                             )) : (
                                 <div className="text-center py-32 glass rounded-[40px] border border-dashed border-white/10">
                                     <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
@@ -170,6 +203,18 @@ export default function ForumPage() {
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none"
                                     placeholder="Summarize the briefing..."
                                 />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold uppercase tracking-widest text-foreground/40">Intel Classification</label>
+                                <select
+                                    value={reportCategory}
+                                    onChange={(e) => setReportCategory(e.target.value)}
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none appearance-none cursor-pointer"
+                                >
+                                    {['Tactics', 'Gear', 'Milsim', 'Tech'].map(cat => (
+                                        <option key={cat} value={cat} className="bg-background text-white">{cat}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-foreground/40">Intel Details</label>
