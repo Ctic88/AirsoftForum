@@ -46,7 +46,7 @@ export default function Navbar() {
 
                     <Link href="/" className="text-sm font-medium hover:text-accent-light transition-colors">Home</Link>
                     <Link href="/tools" className="text-sm font-medium hover:text-accent-light transition-colors">Tools</Link>
-                    <Link href="/tips" className="text-sm font-medium hover:text-accent-light transition-colors">Sfaturi</Link>
+                    <Link href="/tips" className="text-sm font-medium hover:text-accent-light transition-colors">Tips</Link>
                     {session && (
                         <>
                             <Link href="/forum" className="text-sm font-medium hover:text-accent-light transition-colors">Forum</Link>
@@ -116,7 +116,7 @@ export default function Navbar() {
                                         <Info size={18} className="text-accent-light" /> Wiki
                                     </Link>
                                     <Link onClick={() => setIsOpen(false)} href="/tips" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm">
-                                        <Shield size={18} className="text-accent-light" /> Sfaturi
+                                        <Shield size={18} className="text-accent-light" /> Tips
                                     </Link>
                                 </div>
 
@@ -136,7 +136,7 @@ export default function Navbar() {
 
                                 {/* Theme Toggles */}
                                 <div className="bg-black/20 p-4 rounded-3xl flex items-center justify-between mt-2">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-2">Sector Theme</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-2">Theme Selector</span>
                                     <div className="flex items-center gap-2">
                                         {['army', 'tan', 'urban'].map((t) => (
                                             <button
@@ -165,12 +165,21 @@ export default function Navbar() {
                                                     <span className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{session.user.role || 'Operator'}</span>
                                                 </div>
                                             </div>
-                                            <button
-                                                onClick={() => { signOut(); setIsOpen(false); }}
-                                                className="w-full py-4 bg-accent text-white rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl transition-all"
-                                            >
-                                                Logout Operation
-                                            </button>
+                                            <div className="grid grid-cols-2 gap-3 mt-2">
+                                                <Link
+                                                    onClick={() => setIsOpen(false)}
+                                                    href="/settings"
+                                                    className="flex items-center justify-center gap-2 py-4 glass border border-white/10 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all"
+                                                >
+                                                    <User size={14} className="text-accent-light" /> Profile
+                                                </Link>
+                                                <button
+                                                    onClick={() => { signOut(); setIsOpen(false); }}
+                                                    className="flex items-center justify-center gap-2 py-4 bg-accent/20 border border-accent/20 text-accent-light rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-accent/30 transition-all shadow-lg"
+                                                >
+                                                    <LogOut size={14} /> Logout
+                                                </button>
+                                            </div>
                                         </>
                                     ) : (
                                         <div className="grid grid-cols-2 gap-4">
