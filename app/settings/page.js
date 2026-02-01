@@ -43,18 +43,26 @@ export default function SettingsPage() {
 
     const handleSave = async (e) => {
         e.preventDefault();
+        console.log("Attempting profile update...", profile);
         setSaving(true);
-        const res = await fetch('/api/profile', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(profile),
-        });
+        try {
+            const res = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(profile),
+            });
 
-        if (res.ok) {
-            // HUD notification logic would go here
-            alert('Profile Updated Successfully');
-        } else {
-            alert('Failed to update profile');
+            if (res.ok) {
+                console.log("Profile updated successfully");
+                alert('Profile Updated Successfully');
+            } else {
+                const errorData = await res.json();
+                console.error("Profile update failed:", errorData);
+                alert(`Failed to update profile: ${errorData.message || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error("Network or Client Error:", error);
+            alert("Connection error. Check console for details.");
         }
         setSaving(false);
     };
@@ -126,11 +134,11 @@ export default function SettingsPage() {
                         </div>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-end pb-24 md:pb-0">
                         <button
                             type="submit"
                             disabled={saving}
-                            className="bg-accent hover:bg-accent-light text-white px-10 py-4 rounded-full font-bold flex items-center gap-2 shadow-xl hover:scale-105 transition-all"
+                            className="w-full md:w-auto bg-accent hover:bg-accent-light text-white px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-105 transition-all"
                         >
                             {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                             Update Identity
