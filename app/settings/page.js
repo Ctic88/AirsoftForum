@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import { User, Shield, Target, Users, Save, Loader2, ChevronLeft } from 'lucide-react';
+import { User, Shield, Target, Users, Save, Loader2, ChevronLeft, Palette } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SettingsPage() {
@@ -18,16 +18,14 @@ export default function SettingsPage() {
         team: '',
         role: 'Assault'
     });
+    const [currentTheme, setCurrentTheme] = useState('army');
 
     useEffect(() => {
-        if (status === 'unauthenticated') {
-            router.push('/login');
-        } else if (status === 'authenticated') {
-            fetchProfile();
-        }
-    }, [status]);
+        const theme = document.documentElement.getAttribute('data-theme') || 'army';
+        setCurrentTheme(theme);
+    }, []);
 
-    const fetchProfile = async () => {
+    const fetchProfile = useCallback(async () => {
         const res = await fetch('/api/profile');
         if (res.ok) {
             const data = await res.json();
@@ -39,7 +37,15 @@ export default function SettingsPage() {
             });
         }
         setLoading(false);
-    };
+    }, []);
+
+    useEffect(() => {
+        if (status === 'unauthenticated') {
+            router.push('/login');
+        } else if (status === 'authenticated') {
+            fetchProfile();
+        }
+    }, [status, fetchProfile, router]);
 
     const handleSave = async (e) => {
         e.preventDefault();
@@ -130,6 +136,40 @@ export default function SettingsPage() {
                                         <option key={r} value={r} className="bg-background">{r}</option>
                                     ))}
                                 </select>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6 pt-8 border-t border-white/5">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 flex items-center gap-2">
+                                <Palette size={12} /> Tactical Interface Theme
+                            </label>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {[
+                                    { id: 'army', name: 'Army Green', color: '#4b5320' },
+                                    { id: 'tan', name: 'Desert Tan', color: '#d2b48c' },
+                                    { id: 'urban', name: 'Urban Grey', color: '#3b3b3b' }
+                                ].map((t) => (
+                                    <button
+                                        key={t.id}
+                                        type="button"
+                                        onClick={() => {
+                                            document.documentElement.setAttribute('data-theme', t.id);
+                                            setCurrentTheme(t.id);
+                                        }}
+                                        className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${currentTheme === t.id
+                                            ? 'bg-accent/20 border-accent/40 shadow-lg scale-[1.02]'
+                                            : 'bg-white/5 border-white/10 hover:bg-white/10'
+                                            }`}
+                                    >
+                                        <div
+                                            className="w-8 h-8 rounded-full border border-white/10 shrink-0"
+                                            style={{ backgroundColor: t.color }}
+                                        />
+                                        <span className={`font-bold text-sm ${currentTheme === t.id ? 'text-accent-light' : 'text-foreground/60'}`}>
+                                            {t.name}
+                                        </span>
+                                    </button>
+                                ))}
                             </div>
                         </div>
                     </div>

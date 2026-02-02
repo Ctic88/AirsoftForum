@@ -30,19 +30,7 @@ export default function Navbar() {
                 </Link>
 
                 <div className="hidden md:flex items-center gap-6">
-                    <div className="flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10">
-                        {['army', 'tan', 'urban'].map((t) => (
-                            <button
-                                key={t}
-                                onClick={() => document.documentElement.setAttribute('data-theme', t)}
-                                className={`w-8 h-8 rounded-full border border-white/10 transition-all hover:scale-110 active:scale-95 flex items-center justify-center`}
-                                style={{
-                                    backgroundColor: t === 'army' ? '#4b5320' : t === 'tan' ? '#d2b48c' : '#3b3b3b'
-                                }}
-                                title={t.charAt(0).toUpperCase() + t.slice(1)}
-                            />
-                        ))}
-                    </div>
+
 
                     <Link href="/" className="text-sm font-medium hover:text-accent-light transition-colors">Home</Link>
                     <Link href="/tools" className="text-sm font-medium hover:text-accent-light transition-colors">Tools</Link>
@@ -60,12 +48,10 @@ export default function Navbar() {
                             <Link href="/settings" className="flex items-center gap-2 text-sm text-foreground/80 hover:text-accent-light transition-colors">
                                 <User className="w-4 h-4" />
                                 <div className="flex flex-col items-start leading-tight">
-                                    <span>{session.user.name || session.user.email}</span>
-                                    {session.user.role === 'admin' && (
-                                        <span className="text-[9px] font-bold text-accent-light uppercase tracking-widest bg-accent/10 px-1.5 py-0.5 rounded-md border border-accent/20 mt-0.5">
-                                            Master Admin
-                                        </span>
-                                    )}
+                                    <span className="font-bold">{session.user.callsign || session.user.name || session.user.email}</span>
+                                    <span className="text-[9px] font-bold text-accent-light uppercase tracking-[0.2em] bg-accent/10 px-2 py-0.5 rounded-md border border-accent/20 mt-1">
+                                        {session.user.role === 'admin' ? 'Master Admin' : (session.user.role || 'Operator')}
+                                    </span>
                                 </div>
                             </Link>
                             <button
@@ -134,23 +120,7 @@ export default function Navbar() {
                                     </div>
                                 )}
 
-                                {/* Theme Toggles */}
-                                <div className="bg-black/20 p-4 rounded-3xl flex items-center justify-between mt-2">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-2">Theme Selector</span>
-                                    <div className="flex items-center gap-2">
-                                        {['army', 'tan', 'urban'].map((t) => (
-                                            <button
-                                                key={t}
-                                                onClick={() => {
-                                                    document.documentElement.setAttribute('data-theme', t);
-                                                    setIsOpen(false);
-                                                }}
-                                                className="w-10 h-10 rounded-xl border border-white/10 transition-all active:scale-90"
-                                                style={{ backgroundColor: t === 'army' ? '#4b5320' : t === 'tan' ? '#d2b48c' : '#3b3b3b' }}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
+
 
                                 {/* Auth Actions */}
                                 <div className="mt-4 pt-4 border-t border-white/5 flex flex-col gap-3">
@@ -161,8 +131,10 @@ export default function Navbar() {
                                                     <User size={24} />
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <span className="font-bold text-white tracking-tight">{session.user.name}</span>
-                                                    <span className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">{session.user.role || 'Operator'}</span>
+                                                    <span className="font-bold text-white tracking-tight">{session.user.callsign || session.user.name}</span>
+                                                    <span className="text-[9px] text-accent-light font-bold uppercase tracking-[0.2em] bg-accent/10 px-2 py-0.5 rounded-md border border-accent/20 mt-1 self-start">
+                                                        {session.user.role === 'admin' ? 'Master Admin' : (session.user.role || 'Operator')}
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-3 mt-2">
@@ -174,8 +146,12 @@ export default function Navbar() {
                                                     <User size={14} className="text-accent-light" /> Profile
                                                 </Link>
                                                 <button
-                                                    onClick={() => { signOut(); setIsOpen(false); }}
-                                                    className="flex items-center justify-center gap-2 py-4 bg-accent/20 border border-accent/20 text-accent-light rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-accent/30 transition-all shadow-lg"
+                                                    type="button"
+                                                    onClick={async () => {
+                                                        await signOut({ callbackUrl: '/' });
+                                                        setIsOpen(false);
+                                                    }}
+                                                    className="flex items-center justify-center gap-2 py-4 bg-accent/20 border border-accent/20 text-accent-light rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-accent/30 transition-all shadow-lg"
                                                 >
                                                     <LogOut size={14} /> Logout
                                                 </button>

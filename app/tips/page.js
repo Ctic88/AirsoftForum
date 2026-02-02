@@ -8,41 +8,41 @@ export default function TipsPage() {
     const levels = [
         {
             title: 'Recruit',
-            subtitle: 'Beginner / Începători',
+            subtitle: 'Beginner',
             icon: <Shield className="w-8 h-8" />,
             color: 'text-blue-400',
             bg: 'bg-blue-400/10',
             tips: [
-                { title: 'Regula de Aur: Ochelarii', content: 'Nu ridica niciodată ochelarii în zona de joc, indiferent de ce se întâmplă. Siguranța ochilor este prioritatea #1.' },
-                { title: 'Fair-play (Call your hits)', content: 'Airsoft-ul se bazează pe onoare. Dacă ești lovit, strigă "MORT!" clar și ridică mâna sau un vestuț portocaliu.' },
-                { title: 'Echipament minim', content: 'Nu ai nevoie de mii de euro. Începe cu ochelari buni, o mască mesh și o replică închiriată sau un G&G Combat Machine.' },
-                { title: 'Trigger Discipline', content: 'Ține degetul pe lângă trăgaci până când ești gata să tragi. Evită descărcările accidentale în safe zone.' }
+                { title: 'The Golden Rule: Eye Protection', content: 'Never lift your goggles in the play area, no matter what happens. Eye safety is priority #1.' },
+                { title: 'Fair-play (Call your hits)', content: 'Airsoft is based on honor. If you are hit, call "HIT!" clearly and raise your hand or an orange dead rag.' },
+                { title: 'Minimum Gear', content: 'You don\'t need thousands of dollars. Start with good goggles, a mesh mask, and a rented replica or a G&G Combat Machine.' },
+                { title: 'Trigger Discipline', content: 'Keep your finger alongside the trigger until you are ready to shoot. Avoid accidental discharges in the safe zone.' }
             ]
         },
         {
             title: 'Operator',
-            subtitle: 'Intermediate / Mediu',
+            subtitle: 'Intermediate',
             icon: <Target className="w-8 h-8" />,
             color: 'text-accent-light',
             bg: 'bg-accent/10',
             tips: [
-                { title: 'Tactical Movement', content: 'Nu alerga în mijlocul câmpului. Folosește cover-ul, "taie felia" la colțuri (slicing the pie) și comunică cu echipa.' },
-                { title: 'Mentenanță de bază', content: 'Învață să cureți teava de precizie după fiecare joc și să reglezi corect Hop-Up-ul pentru greutatea bilelor tale.' },
-                { title: 'Trigger Management', content: 'Folosește modul Semi-Auto în clădiri și evită "overkill-ul". 1-2 bile sunt suficiente pentru a marca un hit.' },
-                { title: 'Comunicarea prin Radio', content: 'Învață frecvențele echipei tale și folosește mesaje scurte și clare: "Contact, ora 12, 50 metri".' }
+                { title: 'Tactical Movement', content: 'Don\'t run in the middle of an open field. Use cover, "slice the pie" at corners, and communicate with your team.' },
+                { title: 'Basic Maintenance', content: 'Learn to clean your precision barrel after every game and correctly adjust the Hop-Up for your BB weight.' },
+                { title: 'Trigger Management', content: 'Use Semi-Auto mode inside buildings and avoid "overkill". 1-2 BBs are enough to mark a hit.' },
+                { title: 'Radio Communication', content: 'Learn your team\'s frequencies and use short and clear messages: "Contact, 12 o\'clock, 50 meters".' }
             ]
         },
         {
             title: 'Veteran',
-            subtitle: 'Advanced / Avansați',
+            subtitle: 'Advanced',
             icon: <Trophy className="w-8 h-8" />,
             color: 'text-amber-500',
             bg: 'bg-amber-500/10',
             tips: [
-                { title: 'Milsim Protocols', content: 'Studiază regulamentele de tip MilSim: ierarhie, limite de muniție, sisteme de medic și misiuni pe termen lung (24h+).' },
-                { title: 'Advanced Teching', content: 'Optimizează-ți replica prin Shimming, AOE correction și instalarea unui MOSFET programabil (ex: Gate Titan/Aster).' },
-                { title: 'Leadership & Strategie', content: 'Învață să coordonezi o grupă. Distribuie sarcini, stabilește puncte de extracție și gestionează resursele echipei.' },
-                { title: 'Land Navigation', content: 'Nu te baza doar pe GPS. Învață să folosești o busolă și o hartă topografică pentru misiunile în păduri mari.' }
+                { title: 'Milsim Protocols', content: 'Study MilSim-style regulations: hierarchy, ammo limits, medic systems, and long-term missions (24h+).' },
+                { title: 'Advanced Teching', content: 'Optimize your replica through Shimming, AOE correction, and installing a programmable MOSFET (ex: Gate Titan/Aster).' },
+                { title: 'Leadership & Strategy', content: 'Learn to coordinate a squad. Distribute tasks, establish extraction points, and manage team resources.' },
+                { title: 'Land Navigation', content: 'Don\'t rely only on GPS. Learn to use a compass and a topographic map for missions in large forests.' }
             ]
         }
     ];
@@ -56,9 +56,9 @@ export default function TipsPage() {
                     <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-light px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6 border border-accent/20">
                         <Zap size={14} /> Tactical Knowledge
                     </div>
-                    <h1 className="text-6xl font-bold tracking-tight text-white mb-6 uppercase">Sfaturi <span className="text-accent-light">Tactice</span></h1>
+                    <h1 className="text-6xl font-bold tracking-tight text-white mb-6 uppercase">Tactical <span className="text-accent-light">Tips</span></h1>
                     <p className="text-foreground/40 max-w-2xl mx-auto text-lg">
-                        De la recrut la veteran. Ghidul tău pentru progres în arena de airsoft.
+                        From recruit to veteran. Your guide to progressing in the airsoft arena.
                     </p>
                 </header>
 
@@ -95,17 +95,6 @@ export default function TipsPage() {
                             </div>
                         </section>
                     ))}
-                </div>
-
-                <div className="mt-32 glass p-12 rounded-[48px] border border-accent/20 text-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-                    <h3 className="text-3xl font-bold text-white mb-4">Ești gata pentru prima misiune?</h3>
-                    <p className="text-foreground/60 mb-8 max-w-xl mx-auto">
-                        Alătură-te discuțiilor de pe forum pentru a pune întrebări specifice sau pentru a-ți împărtăși propriile experiențe.
-                    </p>
-                    <Link href="/forum" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-bold hover:scale-105 transition-transform shadow-xl">
-                        Intră pe Forum <ChevronRight size={18} />
-                    </Link>
                 </div>
             </div>
         </main>
