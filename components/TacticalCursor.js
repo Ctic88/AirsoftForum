@@ -48,20 +48,20 @@ export default function TacticalCursor() {
             }}
         >
             {/* Central Dot */}
-            <div className="w-1 h-1 bg-accent-light rounded-full shadow-[0_0_10px_#8b9a5a]" />
+            <div className="w-1.5 h-1.5 bg-accent-light rounded-full shadow-[0_0_12px_#8b9a5a,0_0_20px_#8b9a5a]" />
 
             {/* Crosshair Lines */}
-            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? 'w-8 h-8 opacity-100' : 'w-6 h-6 opacity-40'}`}>
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? 'w-10 h-10 opacity-100' : 'w-8 h-8 opacity-70'}`}>
                 {/* Horizontal */}
-                <div className="absolute top-1/2 left-0 w-full h-[1px] bg-accent-light/50" />
+                <div className="absolute top-1/2 left-0 w-full h-[1.5px] bg-accent-light shadow-[0_0_8px_#8b9a5a]" />
                 {/* Vertical */}
-                <div className="absolute left-1/2 top-0 w-[1px] h-full bg-accent-light/50" />
+                <div className="absolute left-1/2 top-0 w-[1.5px] h-full bg-accent-light shadow-[0_0_8px_#8b9a5a]" />
 
                 {/* Outer Corners (Tactical Brackets) */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent-light" />
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-light" />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-light" />
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent-light" />
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-accent-light shadow-[-2px_-2px_8px_rgba(139,154,90,0.5)]" />
+                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-accent-light shadow-[2px_-2px_8px_rgba(139,154,90,0.5)]" />
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-accent-light shadow-[-2px_2px_8px_rgba(139,154,90,0.5)]" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-accent-light shadow-[2px_2px_8px_rgba(139,154,90,0.5)]" />
             </div>
 
             {/* Pulsing Ring when over interactive elements */}
