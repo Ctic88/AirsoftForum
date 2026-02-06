@@ -112,33 +112,33 @@ export default function TrajectoryVisualizer() {
         ctx.lineTo(canvas.width, canvas.height);
         ctx.stroke();
 
-        // Draw Trajectory
-        ctx.beginPath();
-        ctx.strokeStyle = '#4b5320'; // Army Green
-        ctx.lineWidth = 3;
-        ctx.lineJoin = 'round';
-
-        data.forEach((p, i) => {
-            const px = p.x * scaleX;
-            const py = canvas.height - (p.y * scaleY);
-            if (i === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-        });
-
-        ctx.stroke();
-
-        // Draw Gradient under curve
-        const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        grad.addColorStop(0, 'rgba(75, 83, 32, 0.2)');
-        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-        ctx.lineTo(data[data.length - 1].x * scaleX, canvas.height);
-        ctx.lineTo(0, canvas.height);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        // Draw "Impact" point
+        // Draw Trajectory & Gradient
         if (data.length > 0) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#4b5320'; // Army Green
+            ctx.lineWidth = 3;
+            ctx.lineJoin = 'round';
+
+            data.forEach((p, i) => {
+                const px = p.x * scaleX;
+                const py = canvas.height - (p.y * scaleY);
+                if (i === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            });
+
+            ctx.stroke();
+
+            // Draw Gradient under curve
+            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grad.addColorStop(0, 'rgba(75, 83, 32, 0.2)');
+            grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+            ctx.lineTo(data[data.length - 1].x * scaleX, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Draw "Impact" point
             const last = data[data.length - 1];
             ctx.fillStyle = '#ff4444';
             ctx.beginPath();
