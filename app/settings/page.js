@@ -8,7 +8,7 @@ import { User, Shield, Target, Users, Save, Loader2, ChevronLeft, Palette } from
 import Link from 'next/link';
 
 export default function SettingsPage() {
-    const { data: session, status } = useSession();
+    const { data: session, status, update } = useSession();
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -60,6 +60,12 @@ export default function SettingsPage() {
 
             if (res.ok) {
                 console.log("Profile updated successfully");
+                // Update the local session instantly
+                await update({
+                    name: profile.name,
+                    role: profile.role,
+                    callsign: profile.callsign
+                });
                 alert('Profile Updated Successfully');
             } else {
                 const errorData = await res.json();
