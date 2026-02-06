@@ -26,12 +26,14 @@ export default function Home() {
             The ultimate tactical arena for airsoft enthusiasts. Join discussions, share gear reviews, and connect with operators worldwide.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-delayed">
-            <Link href={session ? "/forum" : "/login"} className="w-full sm:w-auto px-10 py-5 bg-accent text-white rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(75,83,32,0.4)]">
+            <Link href={session ? "/forum" : "/login"} className="px-10 py-5 bg-accent text-white rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(75,83,32,0.4)]">
               {session ? "Enter Forum" : "Login to Forum"}
             </Link>
-            <Link href="/register" className="w-full sm:w-auto px-10 py-5 glass text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all border border-white/20">
-              Join the Squad
-            </Link>
+            {!session && (
+              <Link href="/register" className="px-10 py-5 glass text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all border border-white/20">
+                Join the Squad
+              </Link>
+            )}
           </div>
         </div>
 
