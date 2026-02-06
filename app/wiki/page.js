@@ -125,6 +125,177 @@ export default function WikiPage() {
             content: "Dehydration is the #1 reason players leave the field. Drink water before you feel thirsty. Electrolyte tablets are much better than plain water for long games. High-energy, slow-burn snacks like nuts and protein bars will keep your brain alert during long-duration recon operations.",
             tags: ['Health', 'Survival', 'Water']
         },
+        {
+            id: 14,
+            title: 'Hop-Up Bucking Selection',
+            category: 'Technical',
+            author: 'RangeMaster',
+            date: '2024-04-01',
+            content: "The bucking is the most important part for accuracy. Use a soft bucking (50-60 degrees) for low FPS/winter and a harder one (70-75 degrees) for high FPS. Maple Leaf Wonder/Super are great for flat-hop performance without complex modifications.",
+            tags: ['Hop-Up', 'Accuracy', 'Internal']
+        },
+        {
+            id: 15,
+            title: 'Night Ops: Light Discipline',
+            category: 'Protocols',
+            author: 'Shadow',
+            date: '2024-03-15',
+            content: "White light should only be used in short bursts for navigation or blinding an enemy. Filter your light with red or blue lenses to preserve your natural night vision. Never shine your light directly at teammates' faces if they are using NVG devices.",
+            tags: ['Night', 'Stealth', 'Protocol']
+        },
+        {
+            id: 16,
+            title: 'Cold Weather Battery Care',
+            category: 'Technical',
+            author: 'Frost',
+            date: '2023-12-10',
+            content: "In freezing temperatures, battery performance drops significantly. Keep your spare LiPos in an inner pocket close to your body heat. NiMH batteries are generally more resistant to cold than LiPo, but have less discharge current. Always wrap your motor grip in grip tape for better insulation.",
+            tags: ['Battery', 'Winter', 'Maintenance']
+        },
+        {
+            id: 17,
+            title: 'Sniper Concealment: Ghillie Basics',
+            category: 'Field Guides',
+            author: 'Ghost-1',
+            date: '2024-02-05',
+            content: "A ghillie suit should match the local vegetation. Use logical colors for the season and add natural veg from the field. Focus on breaking up the head and shoulder silhouette. Most snipers are spotted when moving too fast or when their barrel reflects sunlight.",
+            tags: ['Sniper', 'Stealth', 'Camouflage']
+        },
+        {
+            id: 18,
+            title: 'Grenade Deployment SOP',
+            category: 'Protocols',
+            author: 'Boomer',
+            date: '2024-04-10',
+            content: "Always announce 'Frag Out!' before throwing. Use grenades to clear corners or force an enemy into cover. Impact grenades are best for CQB, while timed grenades are safer for throwing over obstacles. Check site rules for 'bang-bang' radius and pyro usage.",
+            tags: ['Ordnance', 'CQB', 'Protocol']
+        },
+        {
+            id: 19,
+            title: 'High-Pressure Air (HPA) Basics',
+            category: 'Technical',
+            author: 'Pressure',
+            date: '2024-01-20',
+            content: "HPA systems offer the most consistent FPS and adjustable rate of fire. Ensure your tank is within its hydro-test date. Use a quality regulator (Redline, PolarStar) to prevent spikes. Always disconnect the line and bleed the regulator after a game to preserve the O-rings.",
+            tags: ['HPA', 'Technical', 'Performance']
+        },
+        {
+            id: 20,
+            title: 'Hand Signals for Stealth',
+            category: 'Protocols',
+            author: 'Silent',
+            date: '2023-11-15',
+            content: "Non-verbal communication is vital for recon. Common signals: Closed fist (Stop), Open palm (Freeze), Finger to ear (Listen), Two fingers to eyes (I see enemy). Ensure the whole squad knows the signals to avoid confusion during high-stress encounters.",
+            tags: ['Comms', 'Stealth', 'Squad']
+        },
+        {
+            id: 21,
+            title: 'Shimming the Gearbox',
+            category: 'Technical',
+            author: 'Mechanic',
+            date: '2024-02-28',
+            content: "Proper shimming aligns your gears perfectly, reducing wear and noise. Start shimming from the bevel gear to the motor pinion. Use a 'shim-down' approach for the sector gear to ensure perfect engagement with the piston rack. A thin layer of quality grease is all you need.",
+            tags: ['Gearbox', 'Technical', 'Repair']
+        },
+        {
+            id: 22,
+            title: 'Eye Protection: ANSI Z87.1+',
+            category: 'Field Guides',
+            author: 'SafetyFirst',
+            date: '2024-03-05',
+            content: "Never compromise on eye protection. Ensure your goggles are rated ANSI Z87.1+ or MIL-PRF-32432. Full-seal goggles are mandatory on most fields. Treat your lenses with anti-fog solution and replace them if they receive a direct, high-joule hit or show deep scratches.",
+            tags: ['Safety', 'Gear', 'Health']
+        },
+        {
+            id: 23,
+            title: 'The Art of Flanking',
+            category: 'Protocols',
+            author: 'Tactician',
+            date: '2024-04-05',
+            content: "Flanking requires one element to pin the enemy (Fix) while another moves to the side or rear (Finish). Timing is critical. The flanking element should maintain silence until they are in a position to deliver decisive fire. Use terrain to mask your movement.",
+            tags: ['Tactics', 'Squad', 'Movement']
+        },
+        {
+            id: 24,
+            title: 'Gas Magazine Maintenance',
+            category: 'Technical',
+            author: 'GreenGas',
+            date: '2023-12-20',
+            content: "Keep your gas magazines slightly pressurized during storage to keep the seals tight. If a mag leaks from the fill valve, try soaking the O-ring in silicone oil. For output valve leaks, use a valve key to tighten or replace the internal seal. Avoid 'venting' all gas at once as it freezes the O-rings.",
+            tags: ['GBB', 'Maintenance', 'Magazine']
+        },
+        {
+            id: 25,
+            title: 'Radio Frequency Selection',
+            category: 'Field Guides',
+            author: 'Signal',
+            date: '2024-01-10',
+            content: "UHF (PMR446 or FRS) is the standard for airsoft. Use CTCSS or DCS 'privacy codes' to filter out other teams, but remember this doesn't actually encrypt your signal—anyone can still listen. High-ground placement for your antenna significantly increases range in forested areas.",
+            tags: ['Radio', 'Comms', 'Field']
+        },
+        {
+            id: 26,
+            title: 'Standardizing Mags: STANAG vs Others',
+            category: 'Field Guides',
+            author: 'Logistician',
+            date: '2024-02-15',
+            content: "Standardizing magazine types within a squad allows for 'buddy-loading' during long fire-fights. The STANAG (M4) platform is the most common. Mid-cap magazines are preferred for their lack of 'rattle' and realistic capacity, vs high-caps which require winding and make noise while moving.",
+            tags: ['Gear', 'Squad', 'Logistics']
+        },
+        {
+            id: 27,
+            title: 'Correcting AOE (Angle of Engagement)',
+            category: 'Technical',
+            author: 'TechPro',
+            date: '2024-03-30',
+            content: "AOE is the angle at which the sector gear makes contact with the first tooth of the piston. Ideally, it should be at 12 o'clock. Use Sorbothane pads or washers on the cylinder head to space the piston back. This prevents stripping the first piston tooth and extends the life of your gearbox shell.",
+            tags: ['Gearbox', 'Piston', 'Technical']
+        },
+        {
+            id: 28,
+            title: 'Urban Combat: High-Low Peek',
+            category: 'Protocols',
+            author: 'Operator-X',
+            date: '2023-11-30',
+            content: "When clearing a corner with a teammate, the 'High-Low' technique allows two guns to bear on a target simultaneously. The lead operator crouches (low), while the second operator stands (high) behind them. Do not use this in hallways where fire can be easily returned at both targets.",
+            tags: ['CQB', 'Tactics', 'Squad']
+        },
+        {
+            id: 29,
+            title: 'Proper Footwear for Airsoft',
+            category: 'Field Guides',
+            author: 'Trekker',
+            date: '2024-02-25',
+            content: "Ankle support is mandatory for outdoor fields with uneven terrain. Waterproof boots (Gore-Tex) are essential for morning dew or muddy conditions. Breaking in your boots weeks before a large event will prevent blisters that could take you out of the game early.",
+            tags: ['Gear', 'Health', 'Field']
+        },
+        {
+            id: 30,
+            title: 'Motor Selection: Torque vs Speed',
+            category: 'Technical',
+            author: 'Voltage',
+            date: '2024-01-08',
+            content: "High-torque motors are better for heavy springs and trigger response. Neodymium magnets provide significantly more power than ferrous ones. High-speed motors are for ultra-high ROF builds but run hotter and are less efficient at semi-auto performance. Always match your gear ratio to your motor's torque.",
+            tags: ['Motor', 'Electronics', 'Technical']
+        },
+        {
+            id: 31,
+            title: 'Sentry Protocol: Keeping Watch',
+            category: 'Protocols',
+            author: 'Watchman',
+            date: '2023-12-05',
+            content: "Sentry duty requires 100% focus. Divide your sector into clear zones of responsibility. Use a 'Scan and Focus' method: scan the horizon, then focus on specific cover points. In a two-man post, one operator rests while the other maintains surveillance to prevent fatigue.",
+            tags: ['SOP', 'Defense', 'Field']
+        },
+        {
+            id: 32,
+            title: 'Clearing Jams in the Field',
+            category: 'Technical',
+            author: 'FieldTech',
+            date: '2024-04-12',
+            content: "If your gun stops firing, check the battery first. If you hear a 'clunk', it might be a BB jam. Disconnect the mag and use a cleaning rod carefully. Never force the trigger if the gearbox is locked, as this can burn out your motor or strip gears. Always carry a folding cleaning rod in your kit.",
+            tags: ['Repair', 'Maintenance', 'Field']
+        },
     ], []);
 
     const filteredArticles = articles.filter(art => {
@@ -213,14 +384,9 @@ export default function WikiPage() {
                                             <span className="text-[10px] font-bold uppercase tracking-widest text-accent-light opacity-60">{art.category}</span>
                                         </div>
                                         <h3 className="text-xl font-bold text-white group-hover:translate-x-1 transition-transform">{art.title}</h3>
-                                        <div className="flex items-center gap-4 mt-1">
-                                            <p className="text-[10px] text-foreground/40 uppercase tracking-widest flex items-center gap-1">
-                                                <User size={10} /> {art.author}
-                                            </p>
-                                            <p className="text-[10px] text-foreground/40 uppercase tracking-widest flex items-center gap-1">
-                                                <Clock size={10} /> {art.date}
-                                            </p>
-                                        </div>
+                                        <p className="text-[10px] text-foreground/40 uppercase tracking-widest flex items-center gap-1">
+                                            <Clock size={10} /> {art.date}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="p-4 rounded-full bg-white/5 text-foreground/20 group-hover:bg-accent group-hover:text-white transition-all transform group-hover:rotate-45">
@@ -284,27 +450,13 @@ export default function WikiPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-12 pt-10 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                                        <User className="text-accent-light" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Authored By</p>
-                                        <p className="text-white font-bold">{selectedArticle.author}</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <button className="px-8 py-4 bg-white/5 hover:bg-white/10 rounded-2xl text-xs font-bold uppercase tracking-widest text-white transition-all border border-white/10 flex items-center gap-2">
-                                        <FileText size={16} /> Print Report
-                                    </button>
-                                    <button
-                                        onClick={() => setSelectedArticle(null)}
-                                        className="px-8 py-4 bg-accent hover:bg-accent-light text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg"
-                                    >
-                                        Dismiss Intel
-                                    </button>
-                                </div>
+                            <div className="mt-12 pt-10 border-t border-white/5 flex justify-end">
+                                <button
+                                    onClick={() => setSelectedArticle(null)}
+                                    className="px-8 py-4 bg-accent hover:bg-accent-light text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg w-full md:w-auto"
+                                >
+                                    Dismiss Intel
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,16 @@ import { useState, useEffect, use } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import { User, Calendar, MessageSquare, Send, Loader2, ChevronLeft } from 'lucide-react';
+import DecryptText from '@/components/DecryptText';
+import { User, Calendar, MessageSquare, Send, Loader2, ChevronLeft, Crosshair, Package, Shield, Cpu } from 'lucide-react';
+
+const CATEGORY_ICONS = {
+    'Tactics': Crosshair,
+    'Gear': Package,
+    'Milsim': Shield,
+    'Tech': Cpu,
+    'General': MessageSquare
+};
 import Link from 'next/link';
 
 export default function TopicPage({ params }) {
@@ -96,14 +105,20 @@ export default function TopicPage({ params }) {
 
                     <header className="mb-8">
                         <div className="flex gap-3 mb-6">
-                            <span className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Confidential Intel</span>
-                            <span className="bg-white/5 text-foreground/40 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Status: Active</span>
+                            <span className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20 flex items-center gap-2">
+                                {(() => {
+                                    const Icon = CATEGORY_ICONS[topic?.category] || MessageSquare;
+                                    return <Icon size={10} />;
+                                })()}
+                                {topic?.category || 'Confidential Intel'}
+                            </span>
+                            <span className="bg-white/5 text-foreground/40 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/5">Status: Active</span>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">{topic.title}</h1>
                         <div className="flex items-center gap-6 text-sm text-foreground/40">
                             <div className="flex items-center gap-2">
                                 <User className="w-4 h-4" />
-                                <span>{topic.author?.name}</span>
+                                <span>{topic.author?.callsign || topic.author?.name}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
@@ -113,7 +128,7 @@ export default function TopicPage({ params }) {
                     </header>
 
                     <div className="text-lg text-foreground/80 leading-relaxed whitespace-pre-wrap border-t border-white/5 pt-8">
-                        {topic.content}
+                        <DecryptText text={topic.content} speed={15} />
                     </div>
                 </article>
 
@@ -158,10 +173,10 @@ export default function TopicPage({ params }) {
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center gap-3">
                                         <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent-light font-bold text-xs uppercase">
-                                            {comment.author?.name?.charAt(0) || 'U'}
+                                            {(comment.author?.callsign || comment.author?.name || 'U').charAt(0)}
                                         </div>
                                         <div>
-                                            <p className="text-sm font-bold text-white">{comment.author?.name}</p>
+                                            <p className="text-sm font-bold text-white">{comment.author?.callsign || comment.author?.name}</p>
                                             <p className="text-[10px] text-foreground/30 uppercase tracking-widest">{new Date(comment.created_at).toLocaleTimeString()}</p>
                                         </div>
                                     </div>

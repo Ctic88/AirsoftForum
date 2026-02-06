@@ -9,12 +9,33 @@ export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const router = useRouter();
 
+    const validatePassword = (pass) => {
+        const hasUpper = /[A-Z]/.test(pass);
+        const hasNumber = /[0-9]/.test(pass);
+        const hasSpecial = /[@$!%*?&]/.test(pass);
+        const isLongEnough = pass.length >= 8;
+        return { hasUpper, hasNumber, hasSpecial, isLongEnough };
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validation = validatePassword(password);
+        if (!validation.isLongEnough || !validation.hasUpper || !validation.hasNumber || !validation.hasSpecial) {
+            setError('Password does not meet tactical requirements.');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match. Verification failed.');
+            return;
+        }
+
         setLoading(true);
         setError('');
 
@@ -99,6 +120,32 @@ export default function RegisterPage() {
                                 placeholder="••••••••"
                             />
                         </div>
+
+                        {/* Password Requirements Checklist */}
+                        <div className="mt-4 p-4 bg-white/5 rounded-2xl border border-white/5 space-y-2">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-2">Tactical Requirements:</p>
+                            <div className="grid grid-cols-2 gap-2">
+                                <ReqItem label="8+ Chars" met={password.length >= 8} />
+                                <ReqItem label="Uppercase" met={/[A-Z]/.test(password)} />
+                                <ReqItem label="Number" met={/[0-9]/.test(password)} />
+                                <ReqItem label="Special (@#$)" met={/[@$!%*?&]/.test(password)} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-1">
+                        <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 ml-1">Confirm Identity</label>
+                        <div className="relative">
+                            <Shield className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
+                            <input
+                                type="password"
+                                required
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                className={`w-full bg-white/5 border rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-army-green-light underline-none transition-all ${confirmPassword && password !== confirmPassword ? 'border-red-500/50' : 'border-white/10'}`}
+                                placeholder="Repeat Secure Password"
+                            />
+                        </div>
                     </div>
 
                     <button
@@ -118,5 +165,14 @@ export default function RegisterPage() {
                 </p>
             </div>
         </main>
+    );
+}
+
+function ReqItem({ label, met }) {
+    return (
+        <div className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-tighter ${met ? 'text-army-green-light' : 'text-foreground/20'}`}>
+            <div className={`w-1.5 h-1.5 rounded-full ${met ? 'bg-army-green-light shadow-[0_0_8px_rgba(139,154,90,0.6)]' : 'bg-white/10'}`} />
+            {label}
+        </div>
     );
 }

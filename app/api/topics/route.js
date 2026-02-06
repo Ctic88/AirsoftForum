@@ -7,7 +7,7 @@ export async function GET() {
     try {
         const { data: topics, error } = await supabase
             .from('topics')
-            .select('*, author:users(name)')
+            .select('*, author:users(name, callsign)')
             .order('createdAt', { ascending: false });
 
         if (error) throw error;

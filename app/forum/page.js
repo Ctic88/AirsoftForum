@@ -5,7 +5,17 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import { Plus, MessageSquare, User, Calendar, Loader2, Search, Trash2 } from 'lucide-react';
+import DecryptText from '@/components/DecryptText';
+import { Plus, MessageSquare, User, Calendar, Loader2, Search, Trash2, Crosshair, Package, Shield, Cpu, ChevronRight } from 'lucide-react';
+
+const CATEGORY_ICONS = {
+    'Tactics': Crosshair,
+    'Gear': Package,
+    'Milsim': Shield,
+    'Tech': Cpu,
+    'General': MessageSquare,
+    'All': Search
+};
 
 export default function ForumPage() {
     const { data: session, status } = useSession();
@@ -116,16 +126,20 @@ export default function ForumPage() {
                                 className="w-full bg-white/5 border border-white/10 rounded-full py-4 px-14 focus:ring-2 focus:ring-accent-light outline-none"
                             />
                         </div>
-                        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-                            {['All', 'Tactics', 'Gear', 'Milsim', 'Tech'].map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setSelectedCategory(cat)}
-                                    className={`px-6 py-4 rounded-full text-xs font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${selectedCategory === cat ? 'bg-accent border-accent text-white' : 'glass border-white/10 text-foreground/40 hover:border-white/20'}`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
+                        <div className="flex gap-2 overflow-x-auto pb-4 md:pb-0 no-scrollbar">
+                            {['All', 'Tactics', 'Gear', 'Milsim', 'Tech'].map(cat => {
+                                const Icon = CATEGORY_ICONS[cat] || MessageSquare;
+                                return (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat)}
+                                        className={`px-6 py-4 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all whitespace-nowrap flex items-center gap-2 ${selectedCategory === cat ? 'bg-accent border-accent text-white shadow-[0_0_20px_rgba(107,122,58,0.4)]' : 'glass border-white/10 text-foreground/40 hover:border-white/20'}`}
+                                    >
+                                        <Icon size={12} />
+                                        {cat}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
                 </header>
@@ -136,45 +150,60 @@ export default function ForumPage() {
                     ) : (
                         <>
                             {filteredTopics.length > 0 ? filteredTopics.map((topic) => (
-                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[28px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex-1 mr-4">
-                                            <Link href={`/forum/${topic.id}`}>
-                                                <h2 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors">{topic.title}</h2>
-                                            </Link>
-                                        </div>
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20">
-                                                {topic.category || 'General'}
+                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[40px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-start justify-between mb-6">
+                                            <div className="flex-1 mr-4">
+                                                <Link href={`/forum/${topic.id}`}>
+                                                    <h2 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors mb-2 uppercase tracking-tight">
+                                                        {topic.title}
+                                                    </h2>
+                                                </Link>
                                             </div>
-                                            {(session?.user?.id === topic.authorId || session?.user?.role === 'admin') && (
-                                                <button
-                                                    onClick={(e) => handleDeleteTopic(e, topic.id)}
-                                                    className="p-2 text-foreground/20 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
-                                                    title="Delete Report"
-                                                >
-                                                    <Trash2 size={16} />
-                                                </button>
-                                            )}
+                                            <div className="flex items-center gap-3">
+                                                <div className="bg-accent/10 text-accent-light px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20 flex items-center gap-2">
+                                                    {(() => {
+                                                        const Icon = CATEGORY_ICONS[topic.category] || MessageSquare;
+                                                        return <Icon size={10} />;
+                                                    })()}
+                                                    {topic.category || 'General'}
+                                                </div>
+                                                {(session?.user?.id === topic.authorId || session?.user?.role === 'admin') && (
+                                                    <button
+                                                        onClick={(e) => handleDeleteTopic(e, topic.id)}
+                                                        className="p-2 text-foreground/20 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                                                        title="Delete Report"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
+
+                                        <Link href={`/forum/${topic.id}`}>
+                                            <p className="text-foreground/60 mb-10 line-clamp-2 md:text-lg italic font-light leading-relaxed">
+                                                <DecryptText text={`"${topic.content}"`} speed={20} />
+                                            </p>
+
+                                            <div className="flex items-center gap-6 text-[10px] text-foreground/20 border-t border-white/5 pt-8 uppercase tracking-[0.2em] font-bold group-hover:text-foreground/40 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent-light">
+                                                        <User size={12} />
+                                                    </div>
+                                                    <span>{topic.author?.callsign || topic.author?.name || 'Unknown Operator'}</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <Calendar size={14} className="text-accent-light/40" />
+                                                    <span>{new Date(topic.createdAt).toLocaleDateString()}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 ml-auto text-accent-light group-hover:translate-x-1 transition-transform">
+                                                    View Briefing <ChevronRight size={14} />
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </div>
-                                    <Link href={`/forum/${topic.id}`}>
-                                        <p className="text-foreground/70 mb-8 line-clamp-2 italic">"{topic.content}"</p>
-                                        <div className="flex items-center gap-6 text-[10px] text-foreground/40 border-t border-white/5 pt-6 uppercase tracking-widest font-bold">
-                                            <div className="flex items-center gap-2">
-                                                <User size={14} className="text-accent-light" />
-                                                <span>{topic.author?.name || 'Unknown Operator'}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Calendar size={14} className="text-accent-light" />
-                                                <span>{new Date(topic.createdAt).toLocaleDateString()}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 ml-auto text-accent-light">
-                                                <MessageSquare size={14} />
-                                                <span>View Briefing</span>
-                                            </div>
-                                        </div>
-                                    </Link>
                                 </div>
                             )) : (
                                 <div className="text-center py-32 glass rounded-[40px] border border-dashed border-white/10">

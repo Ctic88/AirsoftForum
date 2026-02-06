@@ -14,8 +14,12 @@ export async function POST(req) {
         if (!email.includes('@')) {
             return NextResponse.json({ message: 'Invalid email format' }, { status: 400 });
         }
-        if (password.length < 6) {
-            return NextResponse.json({ message: 'Password too short (min 6 chars)' }, { status: 400 });
+        // Password validation (min 8 chars, uppercase, digit, special char)
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            return NextResponse.json({
+                message: 'Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.'
+            }, { status: 400 });
         }
 
         // Check if user already exists

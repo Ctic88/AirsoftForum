@@ -151,8 +151,8 @@ export default function LoadoutsPage() {
 
                                     <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
                                         <div className="flex items-center gap-2">
-                                            <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-[10px] font-bold text-accent-light">
-                                                {kit.author?.name?.charAt(0)}
+                                            <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-[10px] font-bold text-accent-light uppercase">
+                                                {(kit.author?.callsign || kit.author?.name || 'O').charAt(0)}
                                             </div>
                                             <span className="text-xs font-bold text-foreground/60">{kit.author?.callsign || kit.author?.name}</span>
                                         </div>
@@ -289,8 +289,8 @@ export default function LoadoutsPage() {
                             </div>
 
                             <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center font-bold text-xl">
-                                    {selectedKit.author?.name?.charAt(0)}
+                                <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center font-bold text-xl uppercase">
+                                    {(selectedKit.author?.callsign || selectedKit.author?.name || 'O').charAt(0)}
                                 </div>
                                 <div>
                                     <div className="text-sm font-bold text-white">{selectedKit.author?.callsign || selectedKit.author?.name}</div>

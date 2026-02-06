@@ -14,7 +14,7 @@ export async function GET(req) {
 
         const { data: comments, error } = await supabase
             .from('comments')
-            .select('*, author:users(name)')
+            .select('*, author:users(name, callsign)')
             .eq('topic_id', topicId)
             .order('created_at', { ascending: true });
 
@@ -45,7 +45,7 @@ export async function POST(req) {
                     author_id: session.user.id
                 }
             ])
-            .select('*, author:users(name)')
+            .select('*, author:users(name, callsign)')
             .single();
 
         if (error) throw error;

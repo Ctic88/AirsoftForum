@@ -28,7 +28,7 @@ export default function LoginPage() {
             setError('Invalid credentials. Try again.');
             setLoading(false);
         } else {
-            router.push('/forum');
+            router.push('/');
             router.refresh();
         }
     };
