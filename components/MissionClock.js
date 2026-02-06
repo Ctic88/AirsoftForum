@@ -30,7 +30,7 @@ export default function MissionClock() {
     }, []);
 
     return (
-        <div className="mt-8 flex justify-center pointer-events-none animate-fade-in-delayed">
+        <div className="mt-16 flex justify-center pointer-events-none animate-fade-in-delayed">
             <div className="glass p-4 rounded-2xl border border-white/5 flex flex-col items-center group relative min-w-[200px]">
                 <div className="flex items-center gap-2 mb-1">
                     <div className="w-1.5 h-1.5 bg-accent-light rounded-full animate-pulse" />
