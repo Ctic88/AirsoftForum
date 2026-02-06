@@ -40,6 +40,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  cursor: none;
+}
+
+/* Ensure interactive elements also have no system cursor */
+a, button, input, select, textarea, [role="button"] {
+  cursor: none !important;
 }
 
 .glass {

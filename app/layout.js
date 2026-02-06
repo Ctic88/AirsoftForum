@@ -3,6 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import AudioPlayer from "@/components/AudioPlayer";
 import HUDNotifications from "@/components/HUDNotifications";
+import TacticalCursor from "@/components/TacticalCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           {children}
           <AudioPlayer />
           <HUDNotifications />
+          <TacticalCursor />
         </AuthProvider>
       </body>
     </html>
