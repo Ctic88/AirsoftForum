@@ -4,7 +4,6 @@ import { AuthProvider } from "@/components/AuthProvider";
 import AudioPlayer from "@/components/AudioPlayer";
 import HUDNotifications from "@/components/HUDNotifications";
 import TacticalCursor from "@/components/TacticalCursor";
-import MissionClock from "@/components/MissionClock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +31,6 @@ export default function RootLayout({ children }) {
           <AudioPlayer />
           <HUDNotifications />
           <TacticalCursor />
-          <MissionClock />
         </AuthProvider>
       </body>
     </html>

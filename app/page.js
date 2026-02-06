@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import MissionClock from '@/components/MissionClock';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -35,6 +36,7 @@ export default function Home() {
               </Link>
             )}
           </div>
+          <MissionClock />
         </div>
 
 
