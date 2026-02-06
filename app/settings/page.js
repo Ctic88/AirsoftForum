@@ -123,19 +123,24 @@ export default function SettingsPage() {
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none"
                                 />
                             </div>
-                            <div className="space-y-2">
+                            <div className="space-y-4">
                                 <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 flex items-center gap-2">
                                     <Target size={12} /> Battlefield Role
                                 </label>
-                                <select
-                                    value={profile.role}
-                                    onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none"
-                                >
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                     {['Assault', 'Sniper', 'Medic', 'Support', 'Recon', 'Heavy'].map(r => (
-                                        <option key={r} value={r} className="bg-background">{r}</option>
+                                        <button
+                                            key={r}
+                                            type="button"
+                                            onClick={() => setProfile({ ...profile, role: r })}
+                                            className={`py-3 px-4 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all ${profile.role === r
+                                                ? 'bg-accent border-accent text-white shadow-[0_0_15px_rgba(107,122,58,0.3)]'
+                                                : 'bg-white/5 border-white/10 text-foreground/40 hover:border-white/20'}`}
+                                        >
+                                            {r}
+                                        </button>
                                     ))}
-                                </select>
+                                </div>
                             </div>
                         </div>
 
