@@ -87,7 +87,7 @@ export default function TrajectoryVisualizer() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Grid colors
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
         ctx.lineWidth = 1;
 
         // Draw Grid
@@ -100,13 +100,13 @@ export default function TrajectoryVisualizer() {
             ctx.lineTo(i * scaleX, canvas.height);
             ctx.stroke();
 
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-            ctx.font = '10px monospace';
-            ctx.fillText(`${i}m`, i * scaleX + 5, canvas.height - 5);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.font = 'bold 10px monospace';
+            ctx.fillText(`${i}m`, i * scaleX + 5, canvas.height - 10);
         }
 
         // Draw Ground
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
         ctx.beginPath();
         ctx.moveTo(0, canvas.height);
         ctx.lineTo(canvas.width, canvas.height);
