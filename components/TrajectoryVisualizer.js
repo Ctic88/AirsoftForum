@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Target, Info, Wind, Zap } from 'lucide-react';
 
 export default function TrajectoryVisualizer() {
-    const [fps, setFps] = useState(350);
+    const [fps, setFps] = useState('');
+    const [ms, setMs] = useState('');
     const [weight, setWeight] = useState(0.20);
     const [hopup, setHopup] = useState(50); // 0-100%
     const canvasRef = useRef(null);
@@ -21,8 +22,11 @@ export default function TrajectoryVisualizer() {
         let t = 0;
         const dt = 0.01; // 10ms steps
 
-        // Initial velocity (m/s) from FPS
-        let vx = fps * 0.3048;
+        const velocityMs = ms ? Number(ms) : (fps ? Number(fps) * 0.3048 : 0);
+        if (velocityMs === 0) return [];
+
+        // Initial velocity (m/s)
+        let vx = velocityMs;
         let vy = 0;
         let x = 0;
         let y = 1.6; // Shooting from 1.6m height
@@ -30,21 +34,18 @@ export default function TrajectoryVisualizer() {
         const mass = weight / 1000; // Grams to kg
 
         // Magnus force scaling (simplified for UI)
-        // Higher hopup = more backspin = more lift
-        // Max lift is roughly enough to counter gravity + 20%
         const liftScale = (hopup / 100) * (G * 1.5);
 
         while (y > 0 && x < 100 && t < 5) {
             const v = Math.sqrt(vx * vx + vy * vy);
 
-            // Drag Force: Fd = 0.5 * rho * v^2 * Cd * A
+            // Drag Force
             const fd = 0.5 * RHO * v * v * CD * AREA;
             const ax_drag = -(fd * (vx / v)) / mass;
             const ay_drag = -(fd * (vy / v)) / mass;
 
-            // Magnus Force (Lift): Fl = simplified proportional to velocity
-            // Real physics is more complex, but for visualization:
-            const ay_lift = liftScale * (vx / (fps * 0.3048));
+            // Magnus Force (Lift)
+            const ay_lift = liftScale * (vx / velocityMs);
 
             // Total Acceleration
             const ax = ax_drag;
@@ -62,6 +63,18 @@ export default function TrajectoryVisualizer() {
             t += dt;
         }
         return results;
+    };
+
+    const handleFpsChange = (val) => {
+        setFps(val);
+        if (!val) setMs('');
+        else setMs((Number(val) * 0.3048).toFixed(1));
+    };
+
+    const handleMsChange = (val) => {
+        setMs(val);
+        if (!val) setFps('');
+        else setFps(Math.round(Number(val) / 0.3048).toString());
     };
 
     useEffect(() => {
@@ -149,16 +162,44 @@ export default function TrajectoryVisualizer() {
                     </header>
 
                     <div className="space-y-6">
-                        <div className="space-y-3">
-                            <div className="flex justify-between">
-                                <label className="text-xs font-bold text-white uppercase tracking-widest">Initial Muzzle Velocity</label>
-                                <span className="text-accent-light font-bold font-mono">{fps} FPS</span>
+                        <style jsx global>{`
+                            .no-spinner::-webkit-inner-spin-button,
+                            .no-spinner::-webkit-outer-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+                            .no-spinner {
+                                -moz-appearance: textfield;
+                            }
+                        `}</style>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-3">
+                                <div className="flex justify-between">
+                                    <label className="text-[10px] font-bold text-white uppercase tracking-widest">Velocity (FPS)</label>
+                                    <span className="text-accent-light font-bold font-mono text-[10px]">{fps || 0}</span>
+                                </div>
+                                <input
+                                    type="number"
+                                    value={fps}
+                                    onChange={(e) => handleFpsChange(e.target.value)}
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-4 focus:ring-2 focus:ring-accent-light outline-none transition-all font-mono font-bold no-spinner text-sm"
+                                    placeholder="FPS"
+                                />
                             </div>
-                            <input
-                                type="range" min="200" max="600" step="10"
-                                value={fps} onChange={(e) => setFps(parseInt(e.target.value))}
-                                className="w-full accent-accent-light"
-                            />
+                            <div className="space-y-3">
+                                <div className="flex justify-between">
+                                    <label className="text-[10px] font-bold text-white uppercase tracking-widest">Velocity (m/s)</label>
+                                    <span className="text-accent-light font-bold font-mono text-[10px]">{ms || '0.0'}</span>
+                                </div>
+                                <input
+                                    type="number"
+                                    step="0.1"
+                                    value={ms}
+                                    onChange={(e) => handleMsChange(e.target.value)}
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-4 focus:ring-2 focus:ring-accent-light outline-none transition-all font-mono font-bold no-spinner text-sm"
+                                    placeholder="m/s"
+                                />
+                            </div>
                         </div>
 
                         <div className="space-y-3">
@@ -199,11 +240,13 @@ export default function TrajectoryVisualizer() {
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <p className="text-[10px] text-foreground/40 uppercase font-bold">Max Range</p>
-                                <p className="text-lg font-bold text-white">~{simulate().pop()?.x.toFixed(1)}m</p>
+                                <p className="text-lg font-bold text-white">~{simulate().pop()?.x.toFixed(1) || '0.0'}m</p>
                             </div>
                             <div>
                                 <p className="text-[10px] text-foreground/40 uppercase font-bold">Muzzle Energy</p>
-                                <p className="text-lg font-bold text-white">{(0.5 * (weight / 1000) * Math.pow(fps * 0.3048, 2)).toFixed(2)} J</p>
+                                <p className="text-lg font-bold text-white">
+                                    {(0.5 * (weight / 1000) * Math.pow(ms ? Number(ms) : (fps ? Number(fps) * 0.3048 : 0), 2)).toFixed(2)} J
+                                </p>
                             </div>
                         </div>
                     </div>
