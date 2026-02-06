@@ -150,17 +150,18 @@ export default function ForumPage() {
                     ) : (
                         <>
                             {filteredTopics.length > 0 ? filteredTopics.map((topic) => (
-                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[40px] border border-white/5 hover:border-accent-light/30 transition-all cursor-pointer group relative overflow-hidden">
+                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[40px] border border-white/5 hover:border-accent-light/30 transition-all group relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                    <div className="relative z-10">
+                                    {/* Main Link Overlay */}
+                                    <Link href={`/forum/${topic.id}`} className="absolute inset-0 z-10" />
+
+                                    <div className="relative z-20 pointer-events-none">
                                         <div className="flex items-start justify-between mb-6">
                                             <div className="flex-1 mr-4">
-                                                <Link href={`/forum/${topic.id}`}>
-                                                    <h2 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors mb-2 uppercase tracking-tight">
-                                                        {topic.title}
-                                                    </h2>
-                                                </Link>
+                                                <h2 className="text-xl md:text-2xl font-bold text-white leading-tight group-hover:text-accent-light transition-colors mb-2 uppercase tracking-tight">
+                                                    {topic.title}
+                                                </h2>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 <div className="bg-accent/10 text-accent-light px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20 flex items-center gap-2">
@@ -173,7 +174,7 @@ export default function ForumPage() {
                                                 {(session?.user?.id === topic.authorId || session?.user?.role === 'admin') && (
                                                     <button
                                                         onClick={(e) => handleDeleteTopic(e, topic.id)}
-                                                        className="p-2 text-foreground/20 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                                                        className="p-2 text-foreground/20 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all pointer-events-auto relative z-30"
                                                         title="Delete Report"
                                                     >
                                                         <Trash2 size={16} />
@@ -182,27 +183,25 @@ export default function ForumPage() {
                                             </div>
                                         </div>
 
-                                        <Link href={`/forum/${topic.id}`}>
-                                            <p className="text-foreground/60 mb-10 line-clamp-2 md:text-lg italic font-light leading-relaxed">
-                                                <DecryptText text={`"${topic.content}"`} speed={20} />
-                                            </p>
+                                        <p className="text-foreground/60 mb-10 line-clamp-2 md:text-lg italic font-light leading-relaxed">
+                                            <DecryptText text={`"${topic.content}"`} speed={20} />
+                                        </p>
 
-                                            <div className="flex items-center gap-6 text-[10px] text-foreground/20 border-t border-white/5 pt-8 uppercase tracking-[0.2em] font-bold group-hover:text-foreground/40 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent-light">
-                                                        <User size={12} />
-                                                    </div>
-                                                    <span>{topic.author?.callsign || topic.author?.name || 'Unknown Operator'}</span>
+                                        <div className="flex items-center gap-6 text-[10px] text-foreground/20 border-t border-white/5 pt-8 uppercase tracking-[0.2em] font-bold group-hover:text-foreground/40 transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent-light">
+                                                    <User size={12} />
                                                 </div>
-                                                <div className="flex items-center gap-3">
-                                                    <Calendar size={14} className="text-accent-light/40" />
-                                                    <span>{new Date(topic.createdAt).toLocaleDateString()}</span>
-                                                </div>
-                                                <div className="flex items-center gap-2 ml-auto text-accent-light group-hover:translate-x-1 transition-transform">
-                                                    View Briefing <ChevronRight size={14} />
-                                                </div>
+                                                <span>{topic.author?.callsign || topic.author?.name || 'Unknown Operator'}</span>
                                             </div>
-                                        </Link>
+                                            <div className="flex items-center gap-3">
+                                                <Calendar size={14} className="text-accent-light/40" />
+                                                <span>{new Date(topic.createdAt).toLocaleDateString()}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 ml-auto text-accent-light group-hover:translate-x-1 transition-transform">
+                                                View Briefing <ChevronRight size={14} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )) : (
