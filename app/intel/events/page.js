@@ -158,9 +158,15 @@ export default function EventsPage() {
                                     <div className="flex-1">
                                         <div className="flex items-center justify-between mb-2">
                                             <div className="flex items-center gap-3">
-                                                <span className="bg-accent/10 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20 flex items-center gap-2">
-                                                    <Shield size={10} /> Active Ops
-                                                </span>
+                                                {new Date(event.event_date) > new Date() ? (
+                                                    <span className="bg-accent/10 text-accent-light px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-accent/20 flex items-center gap-2">
+                                                        <Shield size={10} /> Active Ops
+                                                    </span>
+                                                ) : (
+                                                    <span className="bg-white/5 text-foreground/40 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10 flex items-center gap-2">
+                                                        <Shield size={10} /> Inactive Ops
+                                                    </span>
+                                                )}
                                                 <span className="text-xs text-foreground/40 flex items-center gap-1">
                                                     <Clock size={12} /> {new Date(event.event_date).toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' })}
                                                 </span>
