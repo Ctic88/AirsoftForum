@@ -6,14 +6,12 @@ export default function TacticalCursor() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isPointer, setIsPointer] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
-        // Disable tactical cursor on touch devices to prevent interaction issues
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (isTouchDevice) {
-            setIsVisible(false);
-            return;
-        }
+        setIsTouch(isTouchDevice);
+        if (isTouchDevice) return;
 
         const onMouseMove = (e) => {
             setPosition({ x: e.clientX, y: e.clientY });
@@ -43,7 +41,7 @@ export default function TacticalCursor() {
         };
     }, [isVisible]);
 
-    if (!isVisible) return null;
+    if (isTouch || !isVisible) return null;
 
     return (
         <div

@@ -145,9 +145,9 @@ export default function Navbar() {
                                             </div>
                                             <button
                                                 type="button"
-                                                onClick={async () => {
-                                                    await signOut({ callbackUrl: '/' });
+                                                onClick={() => {
                                                     setIsOpen(false);
+                                                    signOut({ callbackUrl: '/' });
                                                 }}
                                                 className="w-full mt-1 flex items-center justify-center gap-2 py-4 bg-accent/20 border border-accent/20 text-accent-light rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-accent/30 transition-all shadow-lg"
                                             >

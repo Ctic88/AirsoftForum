@@ -52,14 +52,14 @@ export default function AudioPlayer() {
     }, []);
 
     return (
-        <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] group flex flex-col items-end gap-3">
+        <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] group flex flex-col items-end gap-3 pointer-events-none">
             <audio
                 ref={audioRef}
                 loop
                 src={tacticalPlaylist[currentTrack].url}
             />
 
-            <div className={`glass px-6 py-4 rounded-[32px] border border-white/10 flex flex-col gap-4 transition-all duration-500 overflow-hidden shadow-2xl ${isPlaying ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12 pointer-events-none'}`}>
+            <div className={`glass px-6 py-4 rounded-[32px] border border-white/10 flex flex-col gap-4 transition-all duration-500 overflow-hidden shadow-2xl pointer-events-auto ${isPlaying ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12 pointer-events-none'}`}>
                 <div className="flex items-center gap-4">
                     <div className="flex flex-col min-w-[120px]">
                         <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-accent-light mb-1">Active Frequency</span>
@@ -87,7 +87,7 @@ export default function AudioPlayer() {
 
             <button
                 onClick={toggleAudio}
-                className="glass p-5 rounded-full border border-white/10 shadow-2xl flex items-center gap-3 hover:scale-110 active:scale-95 transition-all bg-accent/10 hover:border-accent-light/30"
+                className="glass p-5 rounded-full border border-white/10 shadow-2xl flex items-center gap-3 hover:scale-110 active:scale-95 transition-all bg-accent/10 hover:border-accent-light/30 pointer-events-auto"
             >
                 <div className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-accent-light animate-pulse' : 'bg-red-500/50'}`}></div>
                 <span className="hidden md:inline text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 group-hover:text-white/80 transition-colors">

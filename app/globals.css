@@ -34,18 +34,19 @@
   --radius-apple-lg: 32px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  cursor: none;
-}
+@media (hover: hover) {
+  body {
+    cursor: none;
+  }
 
-/* Ensure interactive elements also have no system cursor */
-a, button, input, select, textarea, [role="button"] {
-  cursor: none !important;
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    cursor: none !important;
+  }
 }
 
 .glass {
