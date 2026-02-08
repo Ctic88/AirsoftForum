@@ -190,7 +190,7 @@ export default function OperatorsPage() {
                         onClick={() => setSelectedOperator(null)}
                     />
 
-                    <div className="relative glass w-full max-w-2xl rounded-[40px] border border-white/10 shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+                    <div className="relative glass w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300 custom-scrollbar">
                         {/* Modal Header HUD */}
                         <div className="h-48 bg-gradient-to-br from-accent/20 to-transparent p-10 relative">
                             <button

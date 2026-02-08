@@ -404,7 +404,7 @@ export default function EventsPage() {
             {selectedEvent && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setSelectedEvent(null)} />
-                    <div className="relative glass w-full max-w-2xl overflow-hidden rounded-[40px] border border-white/10 shadow-2xl animate-fade-in">
+                    <div className="relative glass w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-fade-in custom-scrollbar">
                         <div className="h-32 bg-gradient-to-br from-accent/20 to-transparent relative">
                             <button
                                 onClick={() => setSelectedEvent(null)}

@@ -407,7 +407,7 @@ export default function WikiPage() {
             {selectedArticle && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedArticle(null)}></div>
-                    <div className="relative glass w-full max-w-3xl rounded-[40px] border border-white/10 overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 overflow-y-auto max-h-[95vh]">
+                    <div className="relative glass w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300 custom-scrollbar">
                         <div className="h-40 bg-accent/20 relative overflow-hidden">
                             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                             <button
