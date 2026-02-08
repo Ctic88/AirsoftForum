@@ -118,10 +118,10 @@ export default function OperatorsPage() {
                                     <div
                                         key={op.id}
                                         onClick={() => setSelectedOperator(op)}
-                                        className="group relative glass p-6 rounded-[32px] border border-white/10 hover:border-accent-light/50 transition-all duration-500 overflow-hidden cursor-pointer"
+                                        className="group relative glass p-6 rounded-apple-lg border border-white/10 hover:border-accent-light/50 transition-all duration-500 overflow-hidden cursor-pointer"
                                     >
                                         {/* Scanline Effect */}
-                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-light/5 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-[2000ms] pointer-events-none" />
+                                        <div className="absolute inset-0 bg-linear-to-b from-transparent via-accent-light/5 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-2000 pointer-events-none" />
 
                                         <div className="flex items-start justify-between relative z-10">
                                             <div className="flex items-center gap-4">
@@ -184,15 +184,15 @@ export default function OperatorsPage() {
 
             {/* Personnel Brief Modal */}
             {selectedOperator && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div
                         className="absolute inset-0 bg-background/80 backdrop-blur-md"
                         onClick={() => setSelectedOperator(null)}
                     />
 
-                    <div className="relative glass w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300 custom-scrollbar">
+                    <div className="relative glass w-full max-w-2xl flex flex-col max-h-[90vh] rounded-apple-lg border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300">
                         {/* Modal Header HUD */}
-                        <div className="h-48 bg-gradient-to-br from-accent/20 to-transparent p-10 relative">
+                        <div className="h-48 bg-linear-to-br from-accent/20 to-transparent p-10 relative shrink-0">
                             <button
                                 onClick={() => setSelectedOperator(null)}
                                 className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all border border-white/10 text-white"
@@ -223,7 +223,8 @@ export default function OperatorsPage() {
                             </div>
                         </div>
 
-                        <div className="p-10 space-y-8">
+                        {/* Scrollable Body */}
+                        <div className="p-10 space-y-8 overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-2 gap-8 font-mono">
                                 <div className="space-y-6">
                                     <div className="space-y-2">
@@ -250,7 +251,7 @@ export default function OperatorsPage() {
                                 </div>
                             </div>
 
-                            <div className="bg-white/5 rounded-3xl p-6 border border-white/5 max-h-64 overflow-y-auto custom-scrollbar">
+                            <div className="bg-white/5 rounded-3xl p-6 border border-white/5 overflow-visible">
                                 <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4 sticky top-0 bg-background/50 backdrop-blur-sm py-1">
                                     Operational History & Objectives
                                 </h4>
@@ -302,7 +303,7 @@ export default function OperatorsPage() {
                             <div className="flex justify-end pt-4">
                                 <button
                                     onClick={() => setSelectedOperator(null)}
-                                    className="px-10 py-4 bg-white/5 hover:bg-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-white transition-all border border-white/10"
+                                    className="px-10 py-4 bg-white/5 hover:bg-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-white transition-all border border-white/10 w-full md:w-auto"
                                 >
                                     Terminate Link
                                 </button>

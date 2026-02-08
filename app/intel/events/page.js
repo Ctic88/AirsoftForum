@@ -145,7 +145,7 @@ export default function EventsPage() {
                         {events.length > 0 ? events.map((event) => {
                             const isJoined = event.event_attendees?.some(a => a.user_id === session?.user?.id);
                             return (
-                                <div key={event.id} className="glass p-6 md:p-8 rounded-[32px] border border-white/5 hover:border-accent-light/30 transition-all group flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                                <div key={event.id} className="glass p-6 md:p-8 rounded-apple-lg border border-white/5 hover:border-accent-light/30 transition-all group flex flex-col md:flex-row gap-6 md:gap-8 items-start">
                                     <div className="bg-white/5 p-4 md:p-6 rounded-2xl flex flex-row md:flex-col items-center justify-center min-w-full md:min-w-[100px] gap-4 md:gap-0 border border-white/5">
                                         <span className="text-accent-light text-[10px] md:text-xs font-bold uppercase tracking-widest mb-0 md:mb-1">
                                             {new Date(event.event_date).toLocaleDateString('ro-RO', { month: 'short' })}
@@ -240,7 +240,7 @@ export default function EventsPage() {
 
             {/* Create Event Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => !creating && setShowModal(false)} />
                     <div className="relative glass w-full max-w-lg overflow-hidden rounded-[40px] border border-white/10 shadow-2xl animate-fade-in">
                         <div className="p-8 md:p-10">
@@ -281,88 +281,7 @@ export default function EventsPage() {
                                         type="datetime-local"
                                         value={newEvent.date}
                                         onChange={e => setNewEvent({ ...newEvent, date: e.target.value })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none [color-scheme:dark]"
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 px-2">Mission Intelligence / Brief</label>
-                                    <textarea
-                                        required
-                                        value={newEvent.description}
-                                        onChange={e => setNewEvent({ ...newEvent, description: e.target.value })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none h-32 resize-none"
-                                        placeholder="Outline operational objectives, gear requirements, and rules of engagement..."
-                                    />
-                                </div>
-
-                                <div className="flex gap-4 pt-4">
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowModal(false)}
-                                        className="flex-1 py-4 glass border border-white/10 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-all"
-                                        disabled={creating}
-                                    >
-                                        Abondon
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        className="flex-1 py-4 bg-accent hover:bg-accent-light text-white rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl transition-all disabled:opacity-50"
-                                        disabled={creating}
-                                    >
-                                        {creating ? <Loader2 className="animate-spin mx-auto w-4 h-4" /> : 'Confirm Deployment'}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Create Event Modal */}
-            {showModal && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => !creating && setShowModal(false)} />
-                    <div className="relative glass w-full max-w-lg overflow-hidden rounded-[40px] border border-white/10 shadow-2xl animate-fade-in">
-                        <div className="p-8 md:p-10">
-                            <h2 className="text-3xl font-bold text-white mb-2">Schedule Operation</h2>
-                            <p className="text-foreground/40 text-sm mb-8">Deploy mission reconnaissance and coordinate logistics.</p>
-
-                            <form onSubmit={handleCreate} className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 px-2">Mission Title</label>
-                                    <input
-                                        required
-                                        value={newEvent.title}
-                                        onChange={e => setNewEvent({ ...newEvent, title: e.target.value })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none"
-                                        placeholder="e.g. Operation Black Fox"
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 px-2">Deployment Site (DZ)</label>
-                                    <select
-                                        required
-                                        value={newEvent.location}
-                                        onChange={e => setNewEvent({ ...newEvent, location: e.target.value })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none appearance-none cursor-pointer"
-                                    >
-                                        <option value="">Select Deployment Zone...</option>
-                                        {fields.map(f => (
-                                            <option key={f.id} value={f.name}>{f.name} ({f.location})</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 px-2">Operation Date & Time</label>
-                                    <input
-                                        required
-                                        type="datetime-local"
-                                        value={newEvent.date}
-                                        onChange={e => setNewEvent({ ...newEvent, date: e.target.value })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none [color-scheme:dark]"
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-accent-light outline-none scheme-dark"
                                     />
                                 </div>
 
@@ -402,10 +321,10 @@ export default function EventsPage() {
 
             {/* Mission Intel Modal */}
             {selectedEvent && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setSelectedEvent(null)} />
-                    <div className="relative glass w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-fade-in custom-scrollbar">
-                        <div className="h-32 bg-gradient-to-br from-accent/20 to-transparent relative">
+                    <div className="relative glass w-full max-w-2xl flex flex-col max-h-[90vh] rounded-apple-lg border border-white/10 shadow-2xl animate-fade-in">
+                        <div className="h-32 bg-linear-to-br from-accent/20 to-transparent relative shrink-0">
                             <button
                                 onClick={() => setSelectedEvent(null)}
                                 className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all text-white border border-white/10"
@@ -423,7 +342,7 @@ export default function EventsPage() {
                             </div>
                         </div>
 
-                        <div className="p-6 md:p-12">
+                        <div className="p-6 md:p-12 overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
                                 <div className="space-y-4 md:space-y-6">
                                     <div>

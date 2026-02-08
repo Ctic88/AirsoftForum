@@ -39,7 +39,7 @@ export default function Converter() {
     };
 
     return (
-        <div className="glass p-8 rounded-[40px] border border-white/10 w-full max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
+        <div className="glass p-8 rounded-40 border border-white/10 w-full max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
             <style jsx global>{`
                 .no-spinner::-webkit-inner-spin-button,
                 .no-spinner::-webkit-outer-spin-button {
@@ -111,8 +111,8 @@ export default function Converter() {
                     </div>
                 </div>
 
-                <div className="mt-4 p-8 bg-accent/10 rounded-[32px] border border-accent/20 flex flex-col items-center justify-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="mt-4 p-8 bg-accent/10 rounded-apple-lg border border-accent/20 flex flex-col items-center justify-center relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-linear-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative z-10 text-center">
                         <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-light mb-2">Muzzle Energy</div>
                         <div className="text-6xl font-bold text-white tracking-tighter flex items-end gap-2">

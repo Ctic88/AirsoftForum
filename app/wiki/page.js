@@ -405,10 +405,11 @@ export default function WikiPage() {
 
             {/* Article Modal */}
             {selectedArticle && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedArticle(null)}></div>
-                    <div className="relative glass w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[40px] border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300 custom-scrollbar">
-                        <div className="h-40 bg-accent/20 relative overflow-hidden">
+                    <div className="relative glass w-full max-w-3xl flex flex-col max-h-[90vh] rounded-apple-lg border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300">
+                        {/* Fixed Header */}
+                        <div className="h-40 bg-accent/20 relative overflow-hidden shrink-0">
                             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                             <button
                                 onClick={() => setSelectedArticle(null)}
@@ -427,7 +428,8 @@ export default function WikiPage() {
                             </div>
                         </div>
 
-                        <div className="p-6 md:p-14">
+                        {/* Scrollable Content */}
+                        <div className="p-6 md:p-14 overflow-y-auto custom-scrollbar">
                             <div className="flex flex-wrap gap-3 md:gap-4 mb-8 md:mb-10">
                                 {selectedArticle.tags.map(tag => (
                                     <span key={tag} className="text-[10px] font-bold text-accent-light bg-accent/5 px-3 md:px-4 py-2 rounded-xl border border-accent/10">
@@ -441,7 +443,7 @@ export default function WikiPage() {
                                     <div className="absolute top-0 right-6 md:right-10 -mt-3">
                                         <div className="bg-background px-3 md:px-4 py-1 rounded-full border border-white/10 flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                                            <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest italic tracking-tighter">Verified Intel</span>
+                                            <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest italic">Verified Intel</span>
                                         </div>
                                     </div>
                                     <p className="text-foreground/80 leading-relaxed text-base md:text-lg italic">

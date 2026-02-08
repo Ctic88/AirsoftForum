@@ -73,12 +73,12 @@ export default function TipsPage() {
                                     <h2 className="text-3xl font-bold text-white uppercase tracking-tighter">{level.title}</h2>
                                     <p className="text-foreground/40 font-bold uppercase tracking-widest text-xs">{level.subtitle}</p>
                                 </div>
-                                <div className="hidden md:block flex-1 h-[1px] bg-gradient-to-r from-white/10 to-transparent ml-8" />
+                                <div className="hidden md:block flex-1 h-px bg-linear-to-r from-white/10 to-transparent ml-8" />
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-6">
                                 {level.tips.map((tip, tIdx) => (
-                                    <div key={tIdx} className="glass p-8 rounded-[32px] border border-white/5 hover:border-white/10 transition-all group">
+                                    <div key={tIdx} className="glass p-8 rounded-apple-lg border border-white/5 hover:border-white/10 transition-all group">
                                         <div className="flex items-start gap-4">
                                             <div className="mt-1 p-2 rounded-full bg-white/5 text-accent-light group-hover:bg-accent group-hover:text-white transition-all">
                                                 <Info size={16} />

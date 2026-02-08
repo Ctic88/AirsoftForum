@@ -150,8 +150,8 @@ export default function ForumPage() {
                     ) : (
                         <>
                             {filteredTopics.length > 0 ? filteredTopics.map((topic) => (
-                                <div key={topic.id} className="glass p-6 md:p-8 rounded-[40px] border border-white/5 hover:border-accent-light/30 transition-all group relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div key={topic.id} className="glass p-6 md:p-8 rounded-40 border border-white/5 hover:border-accent-light/30 transition-all group relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                     {/* Main Link Overlay */}
                                     <Link href={`/forum/${topic.id}`} className="absolute inset-0 z-10" />
@@ -217,9 +217,9 @@ export default function ForumPage() {
 
             {/* Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
+                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-40 border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
                         <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-white">Deploy New Intel</h3>
                         <form onSubmit={handleCreate} className="space-y-6">
                             <div className="space-y-2">

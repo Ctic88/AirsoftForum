@@ -92,7 +92,7 @@ export default function SettingsPage() {
                 </header>
 
                 <form onSubmit={handleSave} className="space-y-6 md:space-y-8">
-                    <div className="glass p-6 md:p-10 rounded-[32px] md:rounded-[40px] border border-white/10 space-y-6 md:space-y-8">
+                    <div className="glass p-6 md:p-10 rounded-apple-lg md:rounded-[40px] border border-white/10 space-y-6 md:space-y-8">
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 flex items-center gap-2">

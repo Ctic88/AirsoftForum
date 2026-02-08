@@ -30,21 +30,21 @@ export default function Navbar() {
                 </Link>
 
                 <div className="hidden md:flex items-center gap-6">
-                    <Link href="/" className="text-sm font-medium hover:text-accent-light transition-colors">Home</Link>
-                    <Link href="/tools" className="text-sm font-medium hover:text-accent-light transition-colors">Tools</Link>
-                    <Link href="/tips" className="text-sm font-medium hover:text-accent-light transition-colors">Tips</Link>
+                    <Link href="/" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Home</Link>
+                    <Link href="/tools" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Tools</Link>
+                    <Link href="/tips" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Tips</Link>
                     {session && (
                         <>
-                            <Link href="/forum" className="text-sm font-medium hover:text-accent-light transition-colors">Forum</Link>
-                            <Link href="/operators" className="text-sm font-medium hover:text-accent-light transition-colors">Operators</Link>
-                            <Link href="/loadouts" className="text-sm font-medium hover:text-accent-light transition-colors">Loadouts</Link>
-                            <Link href="/intel" className="text-sm font-medium hover:text-accent-light transition-colors">Intel</Link>
+                            <Link href="/forum" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Forum</Link>
+                            <Link href="/operators" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Operators</Link>
+                            <Link href="/loadouts" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Loadouts</Link>
+                            <Link href="/intel" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Intel</Link>
                         </>
                     )}
-                    <Link href="/wiki" className="text-sm font-medium hover:text-accent-light transition-colors">Wiki</Link>
+                    <Link href="/wiki" className="text-sm font-medium text-white/90 hover:text-accent-light transition-colors">Wiki</Link>
                     {session ? (
                         <div className="flex items-center gap-4">
-                            <Link href="/settings" className="flex items-center gap-2 text-sm text-foreground/80 hover:text-accent-light transition-colors">
+                            <Link href="/settings" className="flex items-center gap-2 text-sm text-white/90 hover:text-accent-light transition-colors">
                                 <User className="w-4 h-4" />
                                 <div className="flex flex-col items-start leading-tight">
                                     <span className="font-bold">{session.user.callsign || session.user.name || session.user.email}</span>
@@ -79,14 +79,14 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="fixed inset-0 z-[100] md:hidden">
+                <div className="fixed inset-0 z-100 md:hidden">
                     <div
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     />
 
                     <div className="absolute top-24 left-4 right-4 animate-in fade-in slide-in-from-top-4 duration-300">
-                        <div className="bg-[#0b0c0b]/95 backdrop-blur-2xl rounded-[32px] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                        <div className="bg-[#0b0c0b]/95 backdrop-blur-2xl rounded-apple-lg border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
                             <div className="p-6 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
                                 <div className="grid grid-cols-2 gap-3">
                                     <Link onClick={() => setIsOpen(false)} href="/" className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all font-bold text-sm text-white">
