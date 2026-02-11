@@ -66,7 +66,7 @@ export default function RegisterPage() {
                 <span className="font-bold text-2xl tracking-tighter">AIRSOFT<span className="text-army-green-light">FORUM</span></span>
             </Link>
 
-            <div className="w-full max-w-md glass p-10 rounded-[32px] border border-white/10 shadow-2xl">
+            <div className="w-full max-w-md glass p-10 rounded-apple-lg border border-white/10 shadow-2xl">
                 <h2 className="text-3xl font-bold mb-2 text-center">New Recruit</h2>
                 <p className="text-foreground/60 text-center mb-8">Join the elite airsoft community today.</p>
 

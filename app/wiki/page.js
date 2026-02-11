@@ -343,7 +343,7 @@ export default function WikiPage() {
                         <button
                             key={cat.name}
                             onClick={() => setActiveCategory(activeCategory === cat.name ? 'All' : cat.name)}
-                            className={`glass p-6 md:p-8 rounded-[40px] border transition-all text-center relative overflow-hidden group ${activeCategory === cat.name ? 'border-accent-light bg-accent/5' : 'border-white/5 hover:border-white/20'}`}
+                            className={`glass p-6 md:p-8 rounded-apple-xl border transition-all text-center relative overflow-hidden group ${activeCategory === cat.name ? 'border-accent-light bg-accent/5' : 'border-white/5 hover:border-white/20'}`}
                         >
                             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-transform group-hover:scale-110 ${activeCategory === cat.name ? 'bg-accent/40 text-white' : 'bg-white/5 text-accent-light'}`}>
                                 <cat.icon size={32} />
@@ -407,7 +407,7 @@ export default function WikiPage() {
             {selectedArticle && (
                 <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedArticle(null)}></div>
-                    <div className="relative glass w-full max-w-3xl flex flex-col max-h-[90vh] rounded-apple-lg border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300">
+                    <div className="relative glass w-full max-w-3xl flex flex-col max-h-[90vh] rounded-apple-lg border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-300 overflow-hidden">
                         {/* Fixed Header */}
                         <div className="h-40 bg-accent/20 relative overflow-hidden shrink-0">
                             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
@@ -440,12 +440,6 @@ export default function WikiPage() {
 
                             <div className="prose prose-invert max-w-none">
                                 <div className="bg-white/5 p-6 md:p-8 rounded-3xl border border-white/5 relative">
-                                    <div className="absolute top-0 right-6 md:right-10 -mt-3">
-                                        <div className="bg-background px-3 md:px-4 py-1 rounded-full border border-white/10 flex items-center gap-2">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                                            <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest italic">Verified Intel</span>
-                                        </div>
-                                    </div>
                                     <p className="text-foreground/80 leading-relaxed text-base md:text-lg italic">
                                         "{selectedArticle.content}"
                                     </p>

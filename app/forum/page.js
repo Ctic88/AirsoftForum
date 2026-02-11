@@ -71,7 +71,9 @@ export default function ForumPage() {
             fetchTopics();
         } else {
             const error = await res.json();
-            alert(`Error: ${error.message}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Error: ${error.message}`, type: 'alert' }
+            }));
         }
     };
 
@@ -205,7 +207,7 @@ export default function ForumPage() {
                                     </div>
                                 </div>
                             )) : (
-                                <div className="text-center py-32 glass rounded-[40px] border border-dashed border-white/10">
+                                <div className="text-center py-32 glass rounded-apple-xl border border-dashed border-white/10">
                                     <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                     <p className="text-foreground/40 font-bold uppercase tracking-widest text-xs">No intelligence reports matching criteria.</p>
                                 </div>

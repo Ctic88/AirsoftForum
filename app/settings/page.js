@@ -66,15 +66,21 @@ export default function SettingsPage() {
                     role: profile.role,
                     callsign: profile.callsign
                 });
-                alert('Profile Updated Successfully');
+                window.dispatchEvent(new CustomEvent('hud-alert', {
+                    detail: { content: 'Profile Updated Successfully', type: 'intel' }
+                }));
             } else {
                 const errorData = await res.json();
                 console.error("Profile update failed:", errorData);
-                alert(`Failed to update profile: ${errorData.message || 'Unknown error'}`);
+                window.dispatchEvent(new CustomEvent('hud-alert', {
+                    detail: { content: `Failed to update profile: ${errorData.message || 'Unknown error'}`, type: 'alert' }
+                }));
             }
         } catch (error) {
             console.error("Network or Client Error:", error);
-            alert("Connection error. Check console for details.");
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: "Connection error. Check console for details.", type: 'alert' }
+            }));
         }
         setSaving(false);
     };
@@ -92,7 +98,7 @@ export default function SettingsPage() {
                 </header>
 
                 <form onSubmit={handleSave} className="space-y-6 md:space-y-8">
-                    <div className="glass p-6 md:p-10 rounded-apple-lg md:rounded-[40px] border border-white/10 space-y-6 md:space-y-8">
+                    <div className="glass p-6 md:p-10 rounded-apple-lg md:rounded-apple-xl border border-white/10 space-y-6 md:space-y-8">
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 flex items-center gap-2">

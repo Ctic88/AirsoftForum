@@ -40,7 +40,7 @@ export default function LoginPage() {
                 <span className="font-bold text-2xl tracking-tighter">AIRSOFT<span className="text-army-green-light">FORUM</span></span>
             </Link>
 
-            <div className="w-full max-w-md glass p-10 rounded-[32px] border border-white/10 shadow-2xl animate-fade-in">
+            <div className="w-full max-w-md glass p-10 rounded-apple-lg border border-white/10 shadow-2xl animate-fade-in">
                 <h2 className="text-3xl font-bold mb-2 text-center">Welcome Back</h2>
                 <p className="text-foreground/60 text-center mb-8">Sign in to access the secure forum.</p>
 

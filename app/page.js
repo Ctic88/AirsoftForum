@@ -16,7 +16,13 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/20 to-background z-10" />
-          <div className="w-full h-full bg-[url('/hero-custom.png')] bg-cover bg-center animate-subtle-zoom" style={{ backgroundImage: "url('/hero-custom.png')" }}></div>
+          <Image
+            src="/hero-custom.png"
+            alt="Hero Background"
+            fill
+            priority
+            className="object-cover object-center animate-subtle-zoom"
+          />
         </div>
 
         <div className="relative z-20 text-center px-4 max-w-4xl">

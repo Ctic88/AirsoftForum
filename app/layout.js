@@ -1,9 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
-import AudioPlayer from "@/components/AudioPlayer";
-import HUDNotifications from "@/components/HUDNotifications";
-import TacticalCursor from "@/components/TacticalCursor";
+import ClientShell from "@/components/ClientShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +26,7 @@ export default function RootLayout({ children }) {
       >
         <AuthProvider>
           {children}
-          <AudioPlayer />
-          <HUDNotifications />
-          <TacticalCursor />
+          <ClientShell />
         </AuthProvider>
       </body>
     </html>

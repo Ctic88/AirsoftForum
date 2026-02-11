@@ -118,8 +118,8 @@ export default function LoadoutsPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {loadouts.length > 0 ? loadouts.map((kit) => (
-                            <div key={kit.id} className="glass rounded-[40px] border border-white/5 overflow-hidden group hover:border-accent-light/30 transition-all flex flex-col">
-                                <div className="aspect-[4/3] bg-white/5 relative overflow-hidden">
+                            <div key={kit.id} className="glass rounded-apple-xl border border-white/5 overflow-hidden group hover:border-accent-light/30 transition-all flex flex-col">
+                                <div className="aspect-4/3 bg-white/5 relative overflow-hidden">
                                     {kit.image_url ? (
                                         <img src={kit.image_url} alt={kit.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                     ) : (
@@ -166,7 +166,7 @@ export default function LoadoutsPage() {
                                 </div>
                             </div>
                         )) : (
-                            <div className="col-span-full py-40 glass rounded-[40px] border border-dashed border-white/10 text-center">
+                            <div className="col-span-full py-40 glass rounded-apple-xl border border-dashed border-white/10 text-center">
                                 <Search className="mx-auto mb-4 opacity-10 w-12 h-12" />
                                 <p className="text-foreground/20 font-medium">No tactical kits identified in this sector.</p>
                             </div>
@@ -177,9 +177,9 @@ export default function LoadoutsPage() {
 
             {/* Create Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-[40px] border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
+                    <div className="relative glass w-full max-w-2xl p-6 md:p-10 rounded-apple-xl border border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[90vh]">
                         <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-white">Deploy Tactical Kit</h3>
                         <form onSubmit={handleCreate} className="space-y-6">
                             {/* Image Upload Area */}
@@ -249,7 +249,7 @@ export default function LoadoutsPage() {
 
             {/* Inspect Modal */}
             {selectedKit && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setSelectedKit(null)} />
                     <div className="relative glass w-full max-w-4xl p-0 rounded-[48px] border border-white/10 shadow-2xl animate-fade-in overflow-hidden flex flex-col md:flex-row max-h-[90vh]">
                         <button

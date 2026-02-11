@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Target, Info, Wind, Zap } from 'lucide-react';
 
 export default function TrajectoryVisualizer() {
     const [fps, setFps] = useState('');
     const [ms, setMs] = useState('');
-    const [weight, setWeight] = useState(0.20);
+    const [massNum, setMassNum] = useState(0.20);
     const [hopup, setHopup] = useState(50); // 0-100%
     const canvasRef = useRef(null);
 
@@ -17,7 +17,7 @@ export default function TrajectoryVisualizer() {
     const AREA = Math.PI * Math.pow(RADIUS, 2);
     const CD = 0.47; // Drag coefficient for a sphere
 
-    const simulate = () => {
+    const trajectoryData = useMemo(() => {
         const results = [];
         let t = 0;
         const dt = 0.01; // 10ms steps
@@ -31,7 +31,7 @@ export default function TrajectoryVisualizer() {
         let x = 0;
         let y = 1.6; // Shooting from 1.6m height
 
-        const mass = weight / 1000; // Grams to kg
+        const mass = massNum / 1000; // Grams to kg
 
         // Magnus force scaling (simplified for UI)
         const liftScale = (hopup / 100) * (G * 1.5);
@@ -63,7 +63,7 @@ export default function TrajectoryVisualizer() {
             t += dt;
         }
         return results;
-    };
+    }, [fps, ms, massNum, hopup]);
 
     const handleFpsChange = (val) => {
         setFps(val);
@@ -81,7 +81,7 @@ export default function TrajectoryVisualizer() {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        const data = simulate();
+        const data = trajectoryData;
 
         // Clear and setup
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -146,10 +146,10 @@ export default function TrajectoryVisualizer() {
             ctx.fill();
         }
 
-    }, [fps, weight, hopup]);
+    }, [trajectoryData]);
 
     return (
-        <div className="glass p-8 rounded-[40px] border border-white/10 shadow-2xl w-full max-w-5xl mx-auto">
+        <div className="glass p-8 rounded-apple-xl border border-white/10 shadow-2xl w-full max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row gap-12">
                 {/* Controls */}
                 <div className="w-full md:w-1/3 space-y-8">
@@ -205,14 +205,14 @@ export default function TrajectoryVisualizer() {
                         <div className="space-y-3">
                             <div className="flex justify-between">
                                 <label className="text-xs font-bold text-white uppercase tracking-widest">BB Weight (Grade)</label>
-                                <span className="text-accent-light font-bold font-mono">{weight.toFixed(2)}g</span>
+                                <span className="text-accent-light font-bold font-mono">{massNum.toFixed(2)}g</span>
                             </div>
                             <div className="grid grid-cols-4 gap-2">
                                 {[0.20, 0.25, 0.28, 0.30, 0.32, 0.36, 0.40, 0.45].map(w => (
                                     <button
                                         key={w}
-                                        onClick={() => setWeight(w)}
-                                        className={`py-2 rounded-lg text-[10px] font-bold border transition-all ${weight === w ? 'bg-accent text-white border-accent' : 'bg-white/5 text-foreground/40 border-white/10'}`}
+                                        onClick={() => setMassNum(w)}
+                                        className={`py-2 rounded-lg text-[10px] font-bold border transition-all ${massNum === w ? 'bg-accent text-white border-accent' : 'bg-white/5 text-foreground/40 border-white/10'}`}
                                     >
                                         {w.toFixed(2)}
                                     </button>
@@ -240,12 +240,12 @@ export default function TrajectoryVisualizer() {
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <p className="text-[10px] text-foreground/40 uppercase font-bold">Max Range</p>
-                                <p className="text-lg font-bold text-white">~{simulate().pop()?.x.toFixed(1) || '0.0'}m</p>
+                                <p className="text-lg font-bold text-white">~{trajectoryData[trajectoryData.length - 1]?.x.toFixed(1) || '0.0'}m</p>
                             </div>
                             <div>
                                 <p className="text-[10px] text-foreground/40 uppercase font-bold">Muzzle Energy</p>
                                 <p className="text-lg font-bold text-white">
-                                    {(0.5 * (weight / 1000) * Math.pow(ms ? Number(ms) : (fps ? Number(fps) * 0.3048 : 0), 2)).toFixed(2)} J
+                                    {(0.5 * (massNum / 1000) * Math.pow(ms ? Number(ms) : (fps ? Number(fps) * 0.3048 : 0), 2)).toFixed(2)} J
                                 </p>
                             </div>
                         </div>
@@ -254,7 +254,7 @@ export default function TrajectoryVisualizer() {
 
                 {/* Simulation Canvas */}
                 <div className="w-full md:w-2/3 flex flex-col">
-                    <div className="relative flex-1 min-h-[300px] bg-black/40 rounded-[32px] border border-white/5 overflow-hidden group">
+                    <div className="relative flex-1 min-h-[300px] bg-black/40 rounded-apple-lg border border-white/5 overflow-hidden group">
                         <canvas
                             ref={canvasRef}
                             width={800}

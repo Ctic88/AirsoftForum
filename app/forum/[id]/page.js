@@ -68,12 +68,13 @@ export default function TopicPage({ params }) {
         if (res.ok) {
             const newComment = await res.json();
             setComments([...comments, newComment]);
-            setCommentContent('');
         } else {
             const errorData = await res.json();
-            console.error("Comment Error:", errorData);
-            alert(`Error: ${errorData.message || 'Failed to post comment'}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Error: ${errorData.message || 'Failed to post comment'}`, type: 'alert' }
+            }));
         }
+        setCommentContent('');
         setSubmitting(false);
     };
 
@@ -100,7 +101,7 @@ export default function TopicPage({ params }) {
                     Back to Briefing
                 </Link>
 
-                <article className="glass p-6 md:p-10 rounded-[32px] md:rounded-[40px] border border-white/10 mb-12 relative overflow-hidden">
+                <article className="glass p-6 md:p-10 rounded-apple-lg md:rounded-apple-xl border border-white/10 mb-12 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 blur-[80px]" />
 
                     <header className="mb-8">
@@ -140,7 +141,7 @@ export default function TopicPage({ params }) {
 
                     {/* Comment Form */}
                     {session ? (
-                        <form onSubmit={handlePostComment} className="glass p-5 md:p-6 rounded-[28px] md:rounded-[32px] border border-white/10 relative group">
+                        <form onSubmit={handlePostComment} className="glass p-5 md:p-6 rounded-[28px] md:rounded-apple-lg border border-white/10 relative group">
                             <textarea
                                 value={commentContent}
                                 onChange={(e) => setCommentContent(e.target.value)}
@@ -160,7 +161,7 @@ export default function TopicPage({ params }) {
                             </div>
                         </form>
                     ) : (
-                        <div className="glass p-8 rounded-[32px] border border-dashed border-white/10 text-center">
+                        <div className="glass p-8 rounded-apple-lg border border-dashed border-white/10 text-center">
                             <p className="text-foreground/40 mb-4">Authentication required to post comments.</p>
                             <Link href="/login" className="text-accent-light font-bold hover:underline">Log in to Base</Link>
                         </div>

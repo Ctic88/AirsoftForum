@@ -41,7 +41,9 @@ export default function FieldsPage() {
             fetchFields();
         } else {
             const error = await res.json();
-            alert(`Eroare: ${error.message}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Eroare: ${error.message}`, type: 'alert' }
+            }));
         }
     };
 
@@ -71,7 +73,9 @@ export default function FieldsPage() {
             fetchFields();
         } else {
             const error = await res.json();
-            alert(`Eroare: ${error.message}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Eroare: ${error.message}`, type: 'alert' }
+            }));
         }
         setSaving(false);
     };
@@ -122,7 +126,7 @@ export default function FieldsPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {fields.length > 0 ? fields.map((field) => (
-                            <div key={field.id} className="glass p-8 rounded-[40px] border border-white/5 hover:border-accent-light/30 transition-all group">
+                            <div key={field.id} className="glass p-8 rounded-apple-xl border border-white/5 hover:border-accent-light/30 transition-all group">
                                 <div className="flex items-start justify-between mb-6">
                                     <div className="bg-accent/20 p-4 rounded-3xl text-accent-light group-hover:scale-110 transition-transform">
                                         <Trophy size={24} />
@@ -179,7 +183,7 @@ export default function FieldsPage() {
                                 </div>
                             </div>
                         )) : (
-                            <div className="col-span-full py-40 glass rounded-[40px] border border-dashed border-white/10 text-center">
+                            <div className="col-span-full py-40 glass rounded-apple-xl border border-dashed border-white/10 text-center">
                                 <Search className="mx-auto mb-4 opacity-10 w-12 h-12" />
                                 <p className="text-foreground/20 font-medium">No active zones identified in this sector.</p>
                             </div>
@@ -190,7 +194,7 @@ export default function FieldsPage() {
 
             {/* Field Intel Modal */}
             {selectedField && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div className="fixed top-24 right-8 z-100 flex flex-col gap-4 pointer-events-none">
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedField(null)}></div>
                     <div className="glass w-full max-w-2xl rounded-[48px] border border-white/10 overflow-hidden relative shadow-2xl animate-in fade-in zoom-in duration-300">
                         <div className="h-32 bg-accent/20 relative overflow-hidden">
@@ -300,9 +304,9 @@ export default function FieldsPage() {
             )}
             {/* Admin Management Modal */}
             {showManageModal && (
-                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => !saving && setShowManageModal(false)}></div>
-                    <div className="glass w-full max-w-lg rounded-[40px] border border-white/10 overflow-hidden relative shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-300">
+                    <div className="glass w-full max-w-lg rounded-apple-xl border border-white/10 overflow-hidden relative shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-300">
                         <div className="p-8 md:p-10">
                             <h2 className="text-3xl font-bold text-white mb-2">{isEditing ? 'Actualizează Locație' : 'Zonă de Desfășurare Nouă'}</h2>
                             <p className="text-foreground/40 text-sm mb-8">Stabilește recunoașterea strategică pentru operatorii din teren.</p>

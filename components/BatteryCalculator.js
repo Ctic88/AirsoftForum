@@ -21,8 +21,8 @@ export default function BatteryCalculator() {
     }, [capacity, voltage]);
 
     return (
-        <div className="glass p-8 rounded-[32px] border border-white/10 w-full max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+        <div className="glass p-8 rounded-apple-lg border border-white/10 w-full max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
                 <Battery className="w-32 h-32" />
             </div>
 

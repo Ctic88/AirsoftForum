@@ -32,9 +32,9 @@ export default function EventsPage() {
                 console.log('Fetched events:', data);
                 setEvents(data);
             } else {
-                const error = await evRes.json();
-                console.error('Events Fetch Error:', error);
-                alert(`Error fetching missions: ${error.message || 'Unknown error'}`);
+                window.dispatchEvent(new CustomEvent('hud-alert', {
+                    detail: { content: `Error fetching missions: ${error.message || 'Unknown error'}`, type: 'alert' }
+                }));
             }
 
             if (fRes.ok) setFields(await fRes.json());
@@ -67,13 +67,15 @@ export default function EventsPage() {
                 setShowModal(false);
                 fetchData();
             } else {
-                const errorData = await res.json();
-                console.error('Failed to create event:', errorData);
-                alert(`Error: ${errorData.message || 'Unknown error'}`);
+                window.dispatchEvent(new CustomEvent('hud-alert', {
+                    detail: { content: `Error: ${errorData.message || 'Unknown error'}`, type: 'alert' }
+                }));
             }
         } catch (err) {
             console.error('Fetch error:', err);
-            alert('A network error occurred.');
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: 'A network error occurred.', type: 'alert' }
+            }));
         } finally {
             setCreating(false);
         }
@@ -92,13 +94,17 @@ export default function EventsPage() {
             fetchData();
         } else {
             const error = await res.json();
-            alert(`Error aborting mission: ${error.message}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Error aborting mission: ${error.message}`, type: 'alert' }
+            }));
         }
     };
 
     const handleJoin = async (eventId) => {
         if (!session) {
-            alert('Trebuie să fii logat pentru a participa la misiuni.');
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: 'Trebuie să fii logat pentru a participa la misiuni.', type: 'alert' }
+            }));
             return;
         }
 
@@ -112,7 +118,9 @@ export default function EventsPage() {
             fetchData();
         } else {
             const data = await res.json();
-            alert(`Eroare la înscriere: ${data.message || 'Error'} ${data.details ? `(${data.details})` : ''}`);
+            window.dispatchEvent(new CustomEvent('hud-alert', {
+                detail: { content: `Eroare la înscriere: ${data.message || 'Error'} ${data.details ? `(${data.details})` : ''}`, type: 'alert' }
+            }));
         }
     };
 
@@ -229,7 +237,7 @@ export default function EventsPage() {
                                 </div>
                             )
                         }) : (
-                            <div className="py-40 glass rounded-[40px] border border-dashed border-white/10 text-center">
+                            <div className="py-40 glass rounded-apple-xl border border-dashed border-white/10 text-center">
                                 <Search className="mx-auto mb-4 opacity-10 w-12 h-12" />
                                 <p className="text-foreground/20 font-medium">No missions currently scheduled in this sector.</p>
                             </div>
@@ -242,7 +250,7 @@ export default function EventsPage() {
             {showModal && (
                 <div className="fixed inset-0 z-110 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => !creating && setShowModal(false)} />
-                    <div className="relative glass w-full max-w-lg overflow-hidden rounded-[40px] border border-white/10 shadow-2xl animate-fade-in">
+                    <div className="relative glass w-full max-w-lg overflow-hidden rounded-apple-xl border border-white/10 shadow-2xl animate-fade-in">
                         <div className="p-8 md:p-10">
                             <h2 className="text-3xl font-bold text-white mb-2">Schedule Operation</h2>
                             <p className="text-foreground/40 text-sm mb-8">Deploy mission reconnaissance and coordinate logistics.</p>

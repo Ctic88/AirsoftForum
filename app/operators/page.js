@@ -138,7 +138,7 @@ export default function OperatorsPage() {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                                                 <Info size={16} />
                                             </div>
                                         </div>
@@ -171,7 +171,7 @@ export default function OperatorsPage() {
                             })}
 
                             {filteredOperators.length === 0 && (
-                                <div className="col-span-full py-32 bg-white/5 rounded-[40px] border border-dashed border-white/10 flex flex-col items-center">
+                                <div className="col-span-full py-32 bg-white/5 rounded-apple-xl border border-dashed border-white/10 flex flex-col items-center">
                                     <Terminal className="w-12 h-12 text-foreground/20 mb-4" />
                                     <h3 className="text-foreground/40 font-mono text-sm tracking-widest uppercase">No Signals Detected</h3>
                                     <p className="text-foreground/20 font-mono text-[10px] mt-2">Check search parameters or recruitment status.</p>
